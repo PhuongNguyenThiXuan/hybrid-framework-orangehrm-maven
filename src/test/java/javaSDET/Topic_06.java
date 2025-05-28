@@ -7,5 +7,17 @@ public abstract class Topic_06 {
     //Chi duoc ke thua
 
 
-    //OOP:
+    //OOP: Abstraction
+
+    //Lien quan toi lay du liẹu => khac void(): getText, getTitle ....
+    public String getFullname(){
+        return null;
+    }
+
+
+    //Lien quan toi action => dung void(): sendkey/clear/click....
+    public void setFullname(){
+
+    }
+
 }
