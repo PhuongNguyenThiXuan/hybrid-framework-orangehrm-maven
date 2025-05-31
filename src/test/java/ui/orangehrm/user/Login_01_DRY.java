@@ -30,7 +30,7 @@ public class Login_01_DRY {
         driver.manage().window().maximize();
     }
 
-    @Test
+    @Test //Class chứa test case sẽ được khai báo Uper_Carmel_Case do có số => dễ quản lý
     public void Login_01_Empty(){
         driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
 
