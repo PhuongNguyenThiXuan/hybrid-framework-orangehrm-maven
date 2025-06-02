@@ -1,4 +1,4 @@
-package ui.orangehrm.user;
+package com.orangehrm.user;
 
 //import tu thu vien
 import org.openqa.selenium.By;

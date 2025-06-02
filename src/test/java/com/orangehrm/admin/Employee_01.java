@@ -1,4 +1,4 @@
-package ui.orangehrm.admin;
+package com.orangehrm.admin;
 
 public class Employee_01 {
 }
