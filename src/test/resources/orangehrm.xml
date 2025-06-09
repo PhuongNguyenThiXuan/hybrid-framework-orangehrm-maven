@@ -4,9 +4,9 @@
     <test name="Run on FIREFOX">
         <classes>
 <!--            <class name="com.orangehrm.user.Login_01_DRY"></class>-->
-            <class name="com.orangehrm.user.Login_02_BasePage_I_Initial"></class>
-            <class name="com.orangehrm.user.Login_02_BasePage_II_Static"></class>
-            <class name="com.orangehrm.user.Login_02_BasePage_III_Extend"></class>
+            <class name="com.orangehrm.user.Login_02_BasePage_I_Initial"/>
+            <class name="com.orangehrm.user.Login_02_BasePage_II_Static"/>
+            <class name="com.orangehrm.user.Login_02_BasePage_III_Extend"/>
         </classes>
     </test>
 </suite>
