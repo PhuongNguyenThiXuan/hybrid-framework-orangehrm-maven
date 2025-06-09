@@ -10,12 +10,12 @@ public class VinGroup {
         fpt.tvName = "TPBank LG";
         fpt.setTvName();
 
-        fpt.setTvColor(); //protected => khac package khong dung duoc
-
-        fpt.tvChannel = ""; //default => khac package khong dung duoc
-        fpt.setTvChannel(); //default => khac package khong dung duoc
-
-        fpt.tvVolume = ""; //private => khong cho phep truy cap
-        fpt.setTvVolume(); //private => khong cho phep truy cap
+//        fpt.setTvColor(); //protected => khac package khong dung duoc
+//
+//        fpt.tvChannel = ""; //default => khac package khong dung duoc
+//        fpt.setTvChannel(); //default => khac package khong dung duoc
+//
+//        fpt.tvVolume = ""; //private => khong cho phep truy cap
+//        fpt.setTvVolume(); //private => khong cho phep truy cap
     }
 }

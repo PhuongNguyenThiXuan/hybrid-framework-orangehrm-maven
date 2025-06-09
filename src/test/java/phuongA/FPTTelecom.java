@@ -13,7 +13,7 @@ public class FPTTelecom extends FPTCorporation{
         tvChannel = "";
         setTvChannel();
 
-        tvVolume = ""; //private => khong cho phep truy cap
-        setTvVolume(); //private => khong cho phep truy cap
+//        tvVolume = ""; //private => khong cho phep truy cap
+//        setTvVolume(); //private => khong cho phep truy cap
     }
 }

@@ -14,7 +14,7 @@ public class TPBank {
         fpt.tvChannel = "";
         fpt.setTvChannel();
 
-        fpt.tvVolume = ""; //private => khong cho phep truy cap
-        fpt.setTvVolume(); //private => khong cho phep truy cap
+//        fpt.tvVolume = ""; //private => khong cho phep truy cap
+//        fpt.setTvVolume(); //private => khong cho phep truy cap
     }
 }

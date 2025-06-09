@@ -12,10 +12,10 @@ public class FPTSoftware extends FPTCorporation {
         tvColor = "Black";
         setTvColor();
 
-        tvChannel = ""; //default => khac package khong dung duoc
-        setTvChannel(); //default => khac package khong dung duoc
-
-        tvVolume = ""; //private => khong cho phep truy cap
-        setTvVolume(); //private => khong cho phep truy cap
+//        tvChannel = ""; //default => khac package khong dung duoc
+//        setTvChannel(); //default => khac package khong dung duoc
+//
+//        tvVolume = ""; //private => khong cho phep truy cap
+//        setTvVolume(); //private => khong cho phep truy cap
     }
 }

@@ -6,6 +6,6 @@ public class LoginPageObject {
     }
 
     public String getEmailErrorMessage (){
-
+        return null;
     }
 }
