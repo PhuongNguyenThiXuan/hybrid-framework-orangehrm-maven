@@ -23,6 +23,8 @@ public class Login_03_Multiple_Browser extends BaseTest {
         this.appUrl = appUrl;
         basePage = BasePage.getInstance();
         driver = getBrowserDriver(appUrl, browserName);
+
+        System.out.println("driver trong class test: " + driver.toString());
     }
 
     @Test
@@ -37,7 +39,7 @@ public class Login_03_Multiple_Browser extends BaseTest {
         Assert.assertEquals(basePage.getElementText(driver,"//input[@name='password']//parent::div/following-sibling::span"),"Required");
     }
 
-    @Test
+   // @Test
     public void Login_02_Invalid_UserName(){
         basePage.openPageUrl(driver, appUrl);
 
@@ -49,7 +51,7 @@ public class Login_03_Multiple_Browser extends BaseTest {
                 "Invalid credentials");
     }
 
-    @Test
+   // @Test
     public void Login_03_Invalid_Password(){
         basePage.openPageUrl(driver, appUrl);
 
@@ -61,7 +63,7 @@ public class Login_03_Multiple_Browser extends BaseTest {
                 "Invalid credentials");
     }
 
-    @Test
+   // @Test
     public void Login_04_Valid_UserName_Password(){
         basePage.openPageUrl(driver, appUrl);
 

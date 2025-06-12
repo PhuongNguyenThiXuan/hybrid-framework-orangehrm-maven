@@ -40,6 +40,7 @@ public class BasePage {
     }
 
     public void openPageUrl (WebDriver driver, String pageUrl) {
+        System.out.println("driver trong BasePage: " + driver.toString());
         driver.get(pageUrl);
     }
 
