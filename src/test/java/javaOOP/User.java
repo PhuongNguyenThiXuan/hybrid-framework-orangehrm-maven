@@ -6,12 +6,12 @@ public class User {
         //Khoi tao tu public class
         Car car = new Car();
         car.setFullName();
-        car.fullName = "Honda civic";
+        car.fullName = "javaFactory.Honda civic";
 
         Honda honda = new Honda();
         honda.brandName();
         honda.setFullName(); //ke thua car
-        honda.fullName = "Honda Vision"; //ke thua car
+        honda.fullName = "javaFactory.Honda Vision"; //ke thua car
 
         Dog dog = new Dog();
         dog.setColor();

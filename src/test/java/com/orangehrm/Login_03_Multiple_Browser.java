@@ -1,4 +1,4 @@
-package com.orangehrm.user;
+package com.orangehrm;
 
 import core.BasePage;
 import core.BaseTest;
@@ -8,8 +8,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
-import java.time.Duration;
 
 //Extend: không khai báo, không khởi tạo
 public class Login_03_Multiple_Browser extends BaseTest {
