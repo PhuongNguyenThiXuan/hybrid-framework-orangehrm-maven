@@ -18,35 +18,51 @@ public class Login_04_Page_Object extends BaseTest{
     public void beforeClass(String appUrl, String browserName){
         driver = getBrowserDriver(appUrl, browserName);
 
-        loginPage = new LoginPageObject();
+        loginPage = new LoginPageObject(driver);
+
+        adminUsername = "Admin";
+        adminPassword = "admin123";
+        employeeFirstName = "Hello";
+        employeeMiddleName = "Test";
+        employeeLastName = "World!";
+
     }
 
     @Test
     public void Employee_01_CreateNewEmployee(){
-        loginPage.enterToUserNameTextBox("Admin");
-        loginPage.enterToPasswordTextBox("admin123");
+        loginPage.enterToUserNameTextBox(adminUsername);
+        loginPage.enterToPasswordTextBox(adminPassword);
+
         loginPage.clickLoginButton();
+        dashboardPage = new DashboardPageObject(driver);
+        Assert.assertTrue(dashboardPage.isLoadingSpinnerDisappear(driver));
+        dashboardPage.sleepInSecond(2);
 
-        dashboardPage = new DashboardPageObject();
         dashboardPage.clickToPIMModule();
+        employeeListPage = new EmployeeListPageObject(driver);
+        Assert.assertTrue(employeeListPage.isLoadingSpinnerDisappear(driver));
 
-        employeeListPage = new EmployeeListPageObject();
         employeeListPage.clickAddEmployeeButton();
+        addEmployeePage = new AddEmployeePageObject(driver);
+        Assert.assertTrue(addEmployeePage.isLoadingSpinnerDisappear(driver));
 
-        addEmployeePage = new AddEmployeePageObject();
-        addEmployeePage.enterToFirstNameTextBox("");
-        addEmployeePage.enterToMiddleNameTextBox("");
-        addEmployeePage.enterToLastNameTextBox("");
+        addEmployeePage.enterToFirstNameTextBox(employeeFirstName);
+        addEmployeePage.enterToMiddleNameTextBox(employeeMiddleName);
+        addEmployeePage.enterToLastNameTextBox(employeeLastName);
         employeeID = addEmployeePage.getEmployeeID();
+
         addEmployeePage.clickSaveButton();
+        Assert.assertTrue(addEmployeePage.isLoadingSpinnerDisappear(driver));
 
-        personalDetailsPage = new PersonalDetailsPageObject();
-        Assert.assertEquals(personalDetailsPage.getFirstNameTextBoxValue,"");
-        Assert.assertEquals(personalDetailsPage.getMiddleNameTextBoxValue,"");
-        Assert.assertEquals(personalDetailsPage.getLastNameTextBoxValue,"");
-        Assert.assertEquals(personalDetailsPage.getEmployeeIDTextBoxValue,employeeID);
+        personalDetailsPage = new PersonalDetailsPageObject(driver);
+        Assert.assertTrue(personalDetailsPage.isLoadingSpinnerDisappear(driver));
+        personalDetailsPage.sleepInSecond(2);
+
+        Assert.assertEquals(personalDetailsPage.getFirstNameTextBoxValue(),employeeFirstName);
+        Assert.assertEquals(personalDetailsPage.getMiddleNameTextBoxValue(),employeeMiddleName);
+        Assert.assertEquals(personalDetailsPage.getLastNameTextBoxValue(),employeeLastName);
+        Assert.assertEquals(personalDetailsPage.getEmployeeIDTextBoxValue(),employeeID);
     }
-
 
     @AfterClass
     public void quit(){
@@ -59,6 +75,6 @@ public class Login_04_Page_Object extends BaseTest{
     private AddEmployeePageObject addEmployeePage;
     private EmployeeListPageObject employeeListPage;
     private PersonalDetailsPageObject personalDetailsPage;
-    private String employeeID;
+    private String employeeID, adminUsername, adminPassword, employeeFirstName, employeeMiddleName, employeeLastName;
 
 }
