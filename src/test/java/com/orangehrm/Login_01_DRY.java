@@ -32,7 +32,7 @@ public class Login_01_DRY {
 
     @Test //Class chứa test case sẽ được khai báo Uper_Carmel_Case do có số => dễ quản lý
     public void Login_01_Empty(){
-        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+        driver.get("http://localhost/orangehrm/web/index.php/auth/login");
 
 //        driver.findElement(By.cssSelector("input[name='username']")).sendKeys("");
 //        driver.findElement(By.cssSelector("input[name='password']")).sendKeys("");
@@ -46,7 +46,7 @@ public class Login_01_DRY {
 
     @Test
     public void Login_02_Invalid_UserName(){
-        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+        driver.get("http://localhost/orangehrm/web/index.php/auth/login");
 
         driver.findElement(By.cssSelector("input[name='username']")).sendKeys("Admin@gmail.com");
         driver.findElement(By.cssSelector("input[name='password']")).sendKeys("admin123");
@@ -58,7 +58,7 @@ public class Login_01_DRY {
 
     @Test
     public void Login_03_Invalid_Password(){
-        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+        driver.get("http://localhost/orangehrm/web/index.php/auth/login");
 
         driver.findElement(By.cssSelector("input[name='username']")).sendKeys("Admin");
         driver.findElement(By.cssSelector("input[name='password']")).sendKeys("admin1234");
@@ -70,10 +70,10 @@ public class Login_01_DRY {
 
     @Test
     public void Login_04_Valid_UserName_Password(){
-        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+        driver.get("http://localhost/orangehrm/web/index.php/auth/login");
 
-        driver.findElement(By.cssSelector("input[name='username']")).sendKeys("Admin");
-        driver.findElement(By.cssSelector("input[name='password']")).sendKeys("admin123");
+        driver.findElement(By.cssSelector("input[name='username']")).sendKeys("automationfc");
+        driver.findElement(By.cssSelector("input[name='password']")).sendKeys("A@a123456!");
         driver.findElement(By.cssSelector("button.orangehrm-login-button")).click();
 
         Assert.assertTrue(isAllLoadingSpinnerInvisible());
