@@ -12,19 +12,19 @@ public class AddEmployeePageObject extends BasePage {
         this.driver = driver;
     }
 
-    public void enterToFirstNameTextBox(String userName) {
+    public void enterToFirstNameTextBox(String firstName) {
         waitElementVisible(driver, AddEmployeePageUI.FIRST_NAME_TEXT_BOX);
-        sendKey(driver, AddEmployeePageUI.FIRST_NAME_TEXT_BOX, userName);
+        sendKey(driver, AddEmployeePageUI.FIRST_NAME_TEXT_BOX, firstName);
     }
 
-    public void enterToMiddleNameTextBox(String password) {
+    public void enterToMiddleNameTextBox(String middleName) {
         waitElementVisible(driver, AddEmployeePageUI.MIDDLE_NAME_TEXT_BOX);
-        sendKey(driver, AddEmployeePageUI.MIDDLE_NAME_TEXT_BOX, password);
+        sendKey(driver, AddEmployeePageUI.MIDDLE_NAME_TEXT_BOX, middleName);
     }
 
-    public void enterToLastNameTextBox(String lastname) {
+    public void enterToLastNameTextBox(String lastName) {
         waitElementVisible(driver, AddEmployeePageUI.LAST_NAME_TEXT_BOX);
-        sendKey(driver, AddEmployeePageUI.LAST_NAME_TEXT_BOX, lastname);
+        sendKey(driver, AddEmployeePageUI.LAST_NAME_TEXT_BOX, lastName);
     }
 
     public String getEmployeeID() {
