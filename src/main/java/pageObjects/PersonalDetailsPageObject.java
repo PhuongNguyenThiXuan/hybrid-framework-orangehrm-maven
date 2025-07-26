@@ -34,7 +34,7 @@ public class PersonalDetailsPageObject extends BasePage {
     public ContactDetailPageObject openContactDetailPage() {
         //wait
         //click
-        //return PageGeneratorManager.getContactDetailPage(driver);
-        return PageGeneratorGeneric.getPage(ContactDetailPageObject.class, driver);
+        return PageGeneratorManager.getContactDetailPage(driver);
+        //return PageGeneratorGeneric.getPage(ContactDetailPageObject.class, driver);
     }
 }

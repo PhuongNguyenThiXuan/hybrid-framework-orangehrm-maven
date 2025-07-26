@@ -36,7 +36,7 @@ public class AddEmployeePageObject extends BasePage {
         waitElementClickable(driver, AddEmployeePageUI.SAVE_BUTTON);
         clickToElement(driver, AddEmployeePageUI.SAVE_BUTTON);
         waitListElementInvisible(driver, AddEmployeePageUI.SPINNER_ICON);
-        //return PageGeneratorManager.getPersonalDetailsPage(driver);
-        return PageGeneratorGeneric.getPage(PersonalDetailsPageObject.class, driver);
+        return PageGeneratorManager.getPersonalDetailsPage(driver);
+        //return PageGeneratorGeneric.getPage(PersonalDetailsPageObject.class, driver);
     }
 }

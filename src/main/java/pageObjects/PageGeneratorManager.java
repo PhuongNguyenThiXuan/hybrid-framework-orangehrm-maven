@@ -1,7 +1,6 @@
 package pageObjects;
 
 import org.openqa.selenium.WebDriver;
-import pageFactory.EmployeeListPageObject;
 
 public class PageGeneratorManager {
     public static LoginPageObject getLoginPage (WebDriver driver){
