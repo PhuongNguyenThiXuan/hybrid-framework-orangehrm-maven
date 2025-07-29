@@ -60,12 +60,12 @@ public class Login_06_Page_Manager_IV extends BaseTest{
 
     @Test
     public void Employee_02_Contact_Detail(){
-        contactDetailPage = personalDetailsPage.openContactDetailPage();
-
+        contactDetailPage = personalDetailsPage.openContactDetailPage(driver);
     }
 
     @AfterClass
     public void quit(){
+
         driver.quit();
     }
 

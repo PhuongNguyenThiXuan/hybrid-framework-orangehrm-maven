@@ -31,10 +31,5 @@ public class PersonalDetailsPageObject extends BasePage {
         return getDOMProperty(driver,PersonalDetailsPageUI.EMPLOYEE_ID_TEXT_BOX, "value");
     }
 
-    public ContactDetailPageObject openContactDetailPage() {
-        //wait
-        //click
-        return PageGeneratorManager.getContactDetailPage(driver);
-        //return PageGeneratorGeneric.getPage(ContactDetailPageObject.class, driver);
-    }
+
 }

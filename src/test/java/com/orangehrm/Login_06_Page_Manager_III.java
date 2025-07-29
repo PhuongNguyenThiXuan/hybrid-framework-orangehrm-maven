@@ -60,8 +60,7 @@ public class Login_06_Page_Manager_III extends BaseTest{
 
     @Test
     public void Employee_02_Contact_Detail(){
-        contactDetailPage = personalDetailsPage.openContactDetailPage();
-
+        contactDetailPage = personalDetailPage.openContactDetailPage(driver);
     }
 
     @AfterClass
@@ -77,6 +76,7 @@ public class Login_06_Page_Manager_III extends BaseTest{
     private PersonalDetailsPageObject personalDetailsPage;
     private ContactDetailPageObject contactDetailPage;
     private PageGeneratorManager pageGeneratorManager;
+    private PersonalDetailsPageObject personalDetailPage;
     private String employeeID, adminUsername, adminPassword, employeeFirstName, employeeMiddleName, employeeLastName;
 
 }

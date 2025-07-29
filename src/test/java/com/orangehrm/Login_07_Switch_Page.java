@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 import pageObjects.*;
 
 
-public class Login_06_Page_Manager_II extends BaseTest{
+public class Login_07_Switch_Page extends BaseTest{
     private String appUrl;
 
     @Parameters({"appUrl", "browser"})
@@ -18,7 +18,7 @@ public class Login_06_Page_Manager_II extends BaseTest{
     public void beforeClass(String appUrl, String browserName){
         driver = getBrowserDriver(appUrl, browserName);
 
-        loginPage = new LoginPageObject(driver);
+        loginPage = PageGeneratorGeneric.getPage(LoginPageObject.class, driver);
 
         adminUsername = "automationfc";
         adminPassword = "A@a123456!";
@@ -48,23 +48,40 @@ public class Login_06_Page_Manager_II extends BaseTest{
         addEmployeePage.enterToLastNameTextBox(employeeLastName);
         employeeID = addEmployeePage.getEmployeeID();
 
-        personalDetailsPage = addEmployeePage.clickSaveButton();
-        Assert.assertTrue(personalDetailsPage.isLoadingSpinnerDisappear(driver));
-        personalDetailsPage.sleepInSecond(2);
+        personalDetailPage = addEmployeePage.clickSaveButton();
+        Assert.assertTrue(personalDetailPage.isLoadingSpinnerDisappear(driver));
+        personalDetailPage.sleepInSecond(2);
 
-        Assert.assertEquals(personalDetailsPage.getFirstNameTextBoxValue(),employeeFirstName);
-        Assert.assertEquals(personalDetailsPage.getMiddleNameTextBoxValue(),employeeMiddleName);
-        Assert.assertEquals(personalDetailsPage.getLastNameTextBoxValue(),employeeLastName);
-        Assert.assertEquals(personalDetailsPage.getEmployeeIDTextBoxValue(),employeeID);
+        Assert.assertEquals(personalDetailPage.getFirstNameTextBoxValue(),employeeFirstName);
+        Assert.assertEquals(personalDetailPage.getMiddleNameTextBoxValue(),employeeMiddleName);
+        Assert.assertEquals(personalDetailPage.getLastNameTextBoxValue(),employeeLastName);
+        Assert.assertEquals(personalDetailPage.getEmployeeIDTextBoxValue(),employeeID);
     }
 
     @Test
-    public void Employee_02_Contact_Detail(){
-        contactDetailPage = personalDetailsPage.openContactDetailPage(driver);
+    public void Employee_02_Switch_Page(){
+        //Personal -> Contact
+        contactDetailPage = personalDetailPage.openContactDetailPage(driver);
+
+        //Contact -> Job
+        jobPage = contactDetailPage.openJobPage(driver);
+
+        //Job -> Dependent
+        dependentPage = jobPage.openDependentPage(driver);
+
+        //Dependent -> Personal
+        personalDetailPage = dependentPage.openPersonalDetailsPage(driver);
+
+        //Personal -> Job
+        jobPage = personalDetailPage.openJobPage(driver);
+
+        contactDetailPage = jobPage.openContactDetailPage(driver);
+        contactDetailPage = dependentPage.openContactDetailPage(driver);
     }
 
     @AfterClass
     public void quit(){
+
         driver.quit();
     }
 
@@ -73,8 +90,11 @@ public class Login_06_Page_Manager_II extends BaseTest{
     private DashboardPageObject dashboardPage;
     private AddEmployeePageObject addEmployeePage;
     private EmployeeListPageObject employeeListPage;
-    private PersonalDetailsPageObject personalDetailsPage;
+    private PersonalDetailsPageObject personalDetailPage;
     private ContactDetailPageObject contactDetailPage;
+    private PageGeneratorManager pageGeneratorManager;
+    private JobPageObject jobPage;
+    private DependencePageObject dependentPage;
     private String employeeID, adminUsername, adminPassword, employeeFirstName, employeeMiddleName, employeeLastName;
 
 }
