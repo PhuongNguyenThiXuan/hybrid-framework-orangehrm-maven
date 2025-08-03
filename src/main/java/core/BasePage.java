@@ -6,10 +6,13 @@ import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pageObjects.*;
-import pageUIs.*;
+import pageObjects.PageGenerator;
+import pageObjects.openCart.admin.AdminLoginPO;
+import pageObjects.openCart.user.UserHomePO;
+import pageUIs.openCart.admin.AdminDashboardPageUI;
+import pageUIs.openCart.user.UserHomePageUI;
+import pageUIs.orangeHRM.BasePageUI;
 
-import javax.swing.*;
 import java.time.Duration;
 import java.util.List;
 import java.util.Set;
@@ -404,31 +407,37 @@ public class BasePage {
                 .until(ExpectedConditions.presenceOfAllElementsLocatedBy(getByXPath(locator)));
     }
 
+    //orangehrm
     public boolean isLoadingSpinnerDisappear (WebDriver driver){
         return waitListElementInvisible(driver, BasePageUI.SPINNER_ICON);
     }
 
-    public ContactDetailPageObject openContactDetailPage(WebDriver driver) {
-        waitElementClickable(driver, BasePageUI.CONTACT_DETAIL_LINK);
-        clickToElement(driver, BasePageUI.CONTACT_DETAIL_LINK);
-        return PageGeneratorGeneric.getPage(ContactDetailPageObject.class, driver);
+    //opencart
+
+    public UserHomePO clickToLogoutLinkAtUserSite (WebDriver driver) {
+        waitElementVisible(driver, UserHomePageUI.MY_ACCOUNT_LINK);
+        clickToElement(driver, UserHomePageUI.MY_ACCOUNT_LINK);
+        waitElementVisible(driver, pageUIs.openCart.BasePageUI.LOGOUT_BUTTON);
+        clickToElement(driver, pageUIs.openCart.BasePageUI.LOGOUT_BUTTON);
+        waitElementVisible(driver, pageUIs.openCart.BasePageUI.CONTINUE_BUTTON);
+        clickToElement(driver, pageUIs.openCart.BasePageUI.CONTINUE_BUTTON);
+        return PageGenerator.getPage(UserHomePO.class, driver);
     }
 
-    public JobPageObject openJobPage(WebDriver driver) {
-        waitElementClickable(driver, BasePageUI.JOB_LINK);
-        clickToElement(driver, BasePageUI.JOB_LINK);
-        return PageGeneratorGeneric.getPage(JobPageObject.class, driver);
+    public AdminLoginPO clickToLogoutLinkAtAdminSite (WebDriver driver) {
+        waitElementVisible(driver, pageUIs.openCart.BasePageUI.ADMIN_LOGOUT_BUTTON);
+        clickToElement(driver, pageUIs.openCart.BasePageUI.ADMIN_LOGOUT_BUTTON);
+        return PageGenerator.getPage(AdminLoginPO.class, driver);
     }
 
-    public DependencePageObject openDependentPage(WebDriver driver) {
-        waitElementVisible(driver, BasePageUI.DEPENDENT_LINK);
-        clickToElement(driver, BasePageUI.DEPENDENT_LINK);
-        return PageGeneratorGeneric.getPage(DependencePageObject.class,driver);
+
+    public AdminLoginPO openAdminSite(WebDriver driver, String adminUrl) {
+        openPageUrl(driver, adminUrl);
+        return PageGenerator.getPage(AdminLoginPO.class, driver);
     }
 
-    public PersonalDetailsPageObject openPersonalDetailsPage(WebDriver driver) {
-        waitElementClickable(driver, BasePageUI.PERSONAL_DETAIL_LINK);
-        clickToElement(driver, BasePageUI.PERSONAL_DETAIL_LINK);
-        return PageGeneratorGeneric.getPage(PersonalDetailsPageObject.class, driver);
+    public UserHomePO openUserSite(WebDriver driver, String userUrl) {
+        openPageUrl(driver, userUrl);
+        return PageGenerator.getPage(UserHomePO.class, driver);
     }
 }
