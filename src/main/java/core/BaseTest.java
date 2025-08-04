@@ -9,6 +9,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
 import java.time.Duration;
+import java.util.Random;
 
 import static core.BrowserList.*;
 
@@ -42,4 +43,11 @@ public class BaseTest {
         return driver;
     }
 
+    protected void closeBrowser(){
+        driver.quit();
+    }
+
+    protected int getRandomNumber(){
+        return new Random().nextInt(99999);
+    }
 }

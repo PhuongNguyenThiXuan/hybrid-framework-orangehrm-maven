@@ -2,6 +2,7 @@ package com.opencart;
 
 import core.BaseTest;
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -12,6 +13,7 @@ import pageObjects.openCart.admin.AdminDashboardPO;
 import pageObjects.openCart.admin.AdminLoginPO;
 import pageObjects.openCart.user.UserHomePO;
 import pageObjects.openCart.user.UserLoginPO;
+import pageObjects.openCart.user.UserMyAccountPO;
 import pageObjects.openCart.user.UserRegisterPO;
 
 import java.util.Random;
@@ -24,13 +26,11 @@ public class Level_09_Switch_Url extends BaseTest {
         this.userUrl = userUrl;
         this.adminUrl = adminUrl;
 
-        rand = new Random();
-
         adminUser = "automationfc";
         adminPassword = "123456a@A";
         userFirstName = "Phuong";
         userLastName = "Nguyen";
-        userEmailAddress = "phuong" + rand.nextInt(99999) + "@yopmail.com";
+        userEmailAddress = "phuong" + getRandomNumber() + "@yopmail.com";
         userPassword = "123456a@A";
 
         //Tuy vao muon goi url nao duoc mo len truoc
@@ -39,7 +39,7 @@ public class Level_09_Switch_Url extends BaseTest {
     }
 
     @Test
-    public void OpenCart_01_Login_And_Logout() throws InterruptedException {
+    public void OpenCart_01_Login_And_Logout(){
         userLoginPage = userHomePage.clickToMyAccount();
 
         userRegisterPage = userLoginPage.clickToContinueButton();
@@ -51,9 +51,11 @@ public class Level_09_Switch_Url extends BaseTest {
         userRegisterPage.acceptPrivacyCheckbox();
         userRegisterPage.clickContinueButton();
 
-        Thread.sleep(2000);
+        Assert.assertTrue(userRegisterPage.isSuccessMessageDisplayed());
+
         userHomePage = userRegisterPage.clickToLogoutLinkAtUserSite(driver);
 
+        //User => Admin
         adminLoginPage = userRegisterPage.openAdminSite(driver, adminUrl);
 
         adminLoginPage.enterToUserName(adminUser);
@@ -64,13 +66,35 @@ public class Level_09_Switch_Url extends BaseTest {
 
         adminLoginPage = adminCustomerPage.clickToLogoutLinkAtAdminSite(driver);
 
+        //Admin => User
         userHomePage = adminLoginPage.openUserSite(driver, userUrl);
+
+        userLoginPage = userHomePage.clickToMyAccount();
+
+        userLoginPage.enterToEmailAddressTextbox(userEmailAddress);
+        userLoginPage.enterToPasswordTextbox(userPassword);
+        userMyAccountPage = userLoginPage.clickToLoginButton();
+
+        Assert.assertTrue(userMyAccountPage.isMyAccountPageDisplayed());
+
+        //User => Admin
+        adminLoginPage = userMyAccountPage.openAdminSite(driver, adminUrl);
+
+        adminLoginPage.enterToUserName(adminUser);
+        adminLoginPage.enterToPassword(adminPassword);
+        adminDashboardPage = adminLoginPage.clickLoginButton();
+
+        //Admin => User
+        userHomePage = adminDashboardPage.openUserSite(driver, userUrl);
     }
 
+    public void OpenCart_02_Login_Without_Logout() throws InterruptedException {
+
+    }
 
     @AfterClass
     public void quit(){
-        //driver.quit();
+        //closeBrowser();
     }
 
     private WebDriver driver;
@@ -81,7 +105,8 @@ public class Level_09_Switch_Url extends BaseTest {
     private UserHomePO userHomePage;
     private UserLoginPO userLoginPage;
     private UserRegisterPO userRegisterPage;
-    Random rand;
+    private UserMyAccountPO userMyAccountPage;
+
     String adminUser, adminPassword;
     String userFirstName, userLastName, userEmailAddress, userPassword;
 }

@@ -9,9 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.PageGenerator;
 import pageObjects.openCart.admin.AdminLoginPO;
 import pageObjects.openCart.user.UserHomePO;
-import pageUIs.openCart.admin.AdminDashboardPageUI;
-import pageUIs.openCart.user.UserHomePageUI;
-import pageUIs.orangeHRM.BasePageUI;
+import pageUIs.BasePageUI;
 
 import java.time.Duration;
 import java.util.List;
@@ -335,6 +333,7 @@ public class BasePage {
 
     public void scrollToElementOnTop(WebDriver driver, String locator) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", getWebElement(driver, locator));
+        sleepInSecond(1);
     }
 
     public void scrollToElementOnDown(WebDriver driver, String locator) {
@@ -415,18 +414,20 @@ public class BasePage {
     //opencart
 
     public UserHomePO clickToLogoutLinkAtUserSite (WebDriver driver) {
-        waitElementVisible(driver, UserHomePageUI.MY_ACCOUNT_LINK);
-        clickToElement(driver, UserHomePageUI.MY_ACCOUNT_LINK);
-        waitElementVisible(driver, pageUIs.openCart.BasePageUI.LOGOUT_BUTTON);
-        clickToElement(driver, pageUIs.openCart.BasePageUI.LOGOUT_BUTTON);
-        waitElementVisible(driver, pageUIs.openCart.BasePageUI.CONTINUE_BUTTON);
-        clickToElement(driver, pageUIs.openCart.BasePageUI.CONTINUE_BUTTON);
+        waitElementClickable(driver, BasePageUI.USER_MY_ACCOUNT_HEADER);
+        clickToElement(driver, BasePageUI.USER_MY_ACCOUNT_HEADER);
+
+        waitElementClickable(driver, BasePageUI.USER_LOGOUT_BUTTON);
+        clickToElement(driver, BasePageUI.USER_LOGOUT_BUTTON);
+
+        waitElementClickable(driver, BasePageUI.USER_CONTINUE_BUTTON);
+        clickToElement(driver, BasePageUI.USER_CONTINUE_BUTTON);
         return PageGenerator.getPage(UserHomePO.class, driver);
     }
 
     public AdminLoginPO clickToLogoutLinkAtAdminSite (WebDriver driver) {
-        waitElementVisible(driver, pageUIs.openCart.BasePageUI.ADMIN_LOGOUT_BUTTON);
-        clickToElement(driver, pageUIs.openCart.BasePageUI.ADMIN_LOGOUT_BUTTON);
+        waitElementClickable(driver, BasePageUI.ADMIN_LOGOUT_BUTTON);
+        clickToElement(driver, BasePageUI.ADMIN_LOGOUT_BUTTON);
         return PageGenerator.getPage(AdminLoginPO.class, driver);
     }
 

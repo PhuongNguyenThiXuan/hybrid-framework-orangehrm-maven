@@ -14,8 +14,8 @@ public class AdminLoginPO extends BasePage {
     }
 
     public void enterToUserName(String username) {
-        waitElementVisible(driver, AdminLoginPageUI.FIRST_NAME_TEXT_BOX);
-        sendKey(driver, AdminLoginPageUI.FIRST_NAME_TEXT_BOX, username);
+        waitElementVisible(driver, AdminLoginPageUI.USERNAME_TEXT_BOX);
+        sendKey(driver, AdminLoginPageUI.USERNAME_TEXT_BOX, username);
     }
 
     public void enterToPassword(String password) {
@@ -24,7 +24,7 @@ public class AdminLoginPO extends BasePage {
     }
 
     public AdminDashboardPO clickLoginButton() {
-        waitElementVisible(driver, AdminLoginPageUI.LOGIN_BUTTON);
+        waitElementClickable(driver, AdminLoginPageUI.LOGIN_BUTTON);
         clickToElement(driver, AdminLoginPageUI.LOGIN_BUTTON);
         return PageGenerator.getPage(AdminDashboardPO.class,driver);
     }
