@@ -255,7 +255,8 @@ public class BasePage {
     }
 
     public boolean isElementSelected (WebDriver driver, String locator){
-        waitElementSelected(driver, locator);
+        //waitElementSelected(driver, locator);
+        waitElementVisible(driver, locator);
         return getWebElement(driver, locator).isSelected();
     }
 

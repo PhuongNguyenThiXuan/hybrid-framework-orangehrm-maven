@@ -33,9 +33,9 @@ public class UserRegisterPO extends BasePage {
     }
 
     public void acceptPrivacyCheckbox() {
+        scrollToElementOnTop(driver, UserRegisterPageUI.PRIVACY_CHECKBOX);
         waitElementClickable(driver, UserRegisterPageUI.PRIVACY_CHECKBOX);
-        clickToElement(driver, UserRegisterPageUI.PRIVACY_CHECKBOX);
-        //checkToCheckBox(driver, UserRegisterPageUI.PRIVACY_CHECKBOX);
+        checkToCheckBox(driver, UserRegisterPageUI.PRIVACY_CHECKBOX);
     }
 
     public void clickContinueButton() {
