@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import pageObjects.PageGenerator;
 import pageUIs.openCart.admin.AdminCustomerPageUI;
 import pageUIs.openCart.admin.AdminDashboardPageUI;
+import pageUIs.openCart.user.UserMyAccountPageUI;
 
 public class AdminDashboardPO extends BasePage {
     WebDriver driver;
@@ -17,8 +18,14 @@ public class AdminDashboardPO extends BasePage {
         waitElementClickable(driver, AdminDashboardPageUI.CUSTOMER_MENU);
         clickToElement(driver, AdminDashboardPageUI.CUSTOMER_MENU);
         sleepInSecond(1);
+
         waitElementClickable(driver, AdminDashboardPageUI.CUSTOMER_LINK);
         clickToElement(driver, AdminDashboardPageUI.CUSTOMER_LINK);
         return PageGenerator.getPage(AdminCustomerPO.class, driver);
+    }
+
+    public boolean isDashboardHeaderDisplayed() {
+        waitElementVisible(driver, AdminDashboardPageUI.DASHBOARD_HEADER_TEXT);
+        return isElementDisplayed(driver, AdminDashboardPageUI.DASHBOARD_HEADER_TEXT);
     }
 }

@@ -36,15 +36,23 @@ public class BaseTest {
                 throw new RuntimeException("Browser is not valid");
         }
         driver.get(appURL);
-        driver.manage().window().setPosition(new Point(0,0));
-        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30)); // chạy vs BasePageFactory phải cmt implicit
+        //driver.manage().window().setPosition(new Point(0,0));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30)); // chạy vs BasePageFactory phải cmt implicit
         //driver.manage().window().maximize();
         System.out.println("driver trong BaseTest: " + driver.toString());
         return driver;
     }
 
     protected void closeBrowser(){
-        driver.quit();
+        if (!(null == driver)){
+            driver.quit();
+        }
+    }
+
+    protected void closeBrowser (WebDriver driver){
+        if (!(null == driver)){
+            driver.quit();
+        }
     }
 
     protected int getRandomNumber(){

@@ -10,6 +10,7 @@ import pageObjects.PageGenerator;
 import pageObjects.openCart.admin.AdminLoginPO;
 import pageObjects.openCart.user.UserHomePO;
 import pageUIs.BasePageUI;
+import pageUIs.openCart.user.UserHomePageUI;
 
 import java.time.Duration;
 import java.util.List;
@@ -97,6 +98,18 @@ public class BasePage {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public String getCurrentWindowID (WebDriver driver){
+        return driver.getWindowHandle();
+    }
+
+    public void openUrlByNewTAB (WebDriver driver, String url) {
+        driver.switchTo().newWindow(WindowType.TAB).get(url);
+    }
+
+    public void openUrlByNewWindow (WebDriver driver, String url) {
+        driver.switchTo().newWindow(WindowType.WINDOW).get(url);
     }
 
     public void switchToWindowByTitle(WebDriver driver, String title){
@@ -433,13 +446,18 @@ public class BasePage {
     }
 
 
-    public AdminLoginPO openAdminSite(WebDriver driver, String adminUrl) {
+    public void openAdminSite(WebDriver driver, String adminUrl) {
         openPageUrl(driver, adminUrl);
-        return PageGenerator.getPage(AdminLoginPO.class, driver);
     }
 
     public UserHomePO openUserSite(WebDriver driver, String userUrl) {
         openPageUrl(driver, userUrl);
+        return PageGenerator.getPage(UserHomePO.class, driver);
+    }
+
+    public UserHomePO openHomeLogo (WebDriver driver){
+        waitElementClickable(driver, BasePageUI.USER_HOME_LOGO);
+        clickToElement(driver, BasePageUI.USER_HOME_LOGO);
         return PageGenerator.getPage(UserHomePO.class, driver);
     }
 }

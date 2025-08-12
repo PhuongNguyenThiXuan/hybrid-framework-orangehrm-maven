@@ -9,4 +9,5 @@ public class BasePageUI {
     public static final String USER_LOGOUT_BUTTON = "//a[@class='dropdown-item' and text()='Logout']";
     public static final String USER_CONTINUE_BUTTON = "//a[contains(text(),'Continue')]";
     public static final String ADMIN_LOGOUT_BUTTON = "//span[contains(text(),'Logout')]";
+    public static final String USER_HOME_LOGO = "//div[@id='logo']/a";
 }

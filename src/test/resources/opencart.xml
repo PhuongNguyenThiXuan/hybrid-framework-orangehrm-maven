@@ -7,7 +7,7 @@
     <test name="Run on FIREFOX">
         <parameter name="browser" value="chrome"></parameter>
         <classes>
-            <class name="com.opencart.Level_09_Switch_Url"></class>
+            <class name="com.opencart.Level_10_Multiple_Driver"></class>
         </classes>
     </test>
 </suite>
