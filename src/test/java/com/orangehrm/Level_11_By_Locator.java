@@ -30,10 +30,9 @@ public class Level_11_By_Locator extends BaseTest{
         employeeFirstName = "Hello";
         employeeMiddleName = "Test";
         employeeLastName = "World!";
-
     }
 
-    @Test
+    @Test (enabled = true)
     public void Employee_01_CreateNewEmployee(){
         loginPage.enterToUserNameTextBox(adminUsername);
         loginPage.enterToPasswordTextBox(adminPassword);
@@ -63,7 +62,7 @@ public class Level_11_By_Locator extends BaseTest{
         Assert.assertEquals(personalDetailPage.getEmployeeIDTextBoxValue(),employeeID);
     }
 
-    @Test (enabled = false)
+    @Test (enabled = true)
     public void Employee_02_Page_Navigator(){
         //Personal -> Contact
         contactDetailPage = personalDetailPage.openContactDetailPage();
@@ -84,9 +83,53 @@ public class Level_11_By_Locator extends BaseTest{
         contactDetailPage = dependentPage.openContactDetailPage();
     }
 
+    @Test (enabled = true)
+    public void Employee_03_Dynamic_Page(){
+        //Personal -> Contact
+        contactDetailPage = (ContactDetailPageObject) personalDetailPage.openEditNavigatorPageByName("Contact Details");
+
+        //Contact -> Job
+        jobPage = (JobPageObject) contactDetailPage.openEditNavigatorPageByName("Job");
+
+        //Job -> Dependent
+        dependentPage = (DependencePageObject) jobPage.openEditNavigatorPageByName("Dependents");
+
+        //Dependent -> Personal
+        personalDetailPage = (PersonalDetailsPageObject) dependentPage.openEditNavigatorPageByName("Personal Details");
+
+        //Personal -> Job
+        jobPage = (JobPageObject) personalDetailPage.openEditNavigatorPageByName("Job");
+
+        contactDetailPage = (ContactDetailPageObject) jobPage.openEditNavigatorPageByName("Contact Details");
+        contactDetailPage = (ContactDetailPageObject) dependentPage.openEditNavigatorPageByName("Contact Details");
+    }
+
+    @Test (enabled = true)
+    public void Employee_04_Dynamic_Page(){
+        personalDetailPage.openEditNavigatorByName("Contact Details");
+        contactDetailPage = PageGenerator.getPage(ContactDetailPageObject.class, driver);
+
+        contactDetailPage.openEditNavigatorByName("Job");
+        jobPage = PageGenerator.getPage(JobPageObject.class, driver);
+
+        jobPage.openEditNavigatorByName("Dependents");
+        dependentPage = PageGenerator.getPage(DependencePageObject.class, driver);
+
+        dependentPage.openEditNavigatorByName("Personal Details");
+        personalDetailPage = PageGenerator.getPage(PersonalDetailsPageObject.class, driver);
+
+        personalDetailPage.openEditNavigatorByName("Job");
+        jobPage = PageGenerator.getPage(JobPageObject.class, driver);
+
+        jobPage.openEditNavigatorByName("Contact Details");
+        contactDetailPage = PageGenerator.getPage(ContactDetailPageObject.class, driver);
+        dependentPage.openEditNavigatorByName("Contact Details");
+        contactDetailPage = PageGenerator.getPage(ContactDetailPageObject.class, driver);
+    }
+
     @AfterClass
     public void quit(){
-        driver.quit();
+        closeBrowser();
     }
 
     private WebDriver driver;
