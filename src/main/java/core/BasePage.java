@@ -226,11 +226,11 @@ public class BasePage {
         getWebElement(driver, castParameter(locator, restValues)).click();
     }
 
-    public void sendKey (WebDriver driver, String locator, String keyToSend){
+    public void sendKey (WebDriver driver, String locator, CharSequence keyToSend){
         getWebElement(driver, locator).sendKeys(keyToSend);
     }
 
-    public void sendKey (WebDriver driver, String locator, String keyToSend, String... restValues){
+    public void sendKey (WebDriver driver, String locator, CharSequence keyToSend, String... restValues){
         getWebElement(driver, castParameter(locator, restValues)).sendKeys(keyToSend);
     }
 
