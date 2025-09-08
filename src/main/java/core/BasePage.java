@@ -210,11 +210,11 @@ public class BasePage {
         return driver.findElement(getByLocator(castParameter(locator, restValues)));
     }
 
-    private List<WebElement> getListWebElements (WebDriver driver, String locator){
+    public List<WebElement> getListWebElements (WebDriver driver, String locator){
         return driver.findElements(getByLocator(locator));
     }
 
-    private List<WebElement> getListWebElements (WebDriver driver, String locator, String... restValues){
+    public List<WebElement> getListWebElements (WebDriver driver, String locator, String... restValues){
         return driver.findElements(getByLocator(castParameter(locator, restValues)));
     }
 
@@ -227,10 +227,12 @@ public class BasePage {
     }
 
     public void sendKey (WebDriver driver, String locator, CharSequence keyToSend){
+        getWebElement(driver, locator).clear();
         getWebElement(driver, locator).sendKeys(keyToSend);
     }
 
     public void sendKey (WebDriver driver, String locator, CharSequence keyToSend, String... restValues){
+        getWebElement(driver, castParameter(locator, restValues)).clear();
         getWebElement(driver, castParameter(locator, restValues)).sendKeys(keyToSend);
     }
 
@@ -336,6 +338,10 @@ public class BasePage {
         return getListWebElements(driver, locator).size();
     }
 
+    public int getListElementNumber (WebDriver driver, String locator, String... restValues){
+        return getListWebElements(driver, castParameter(locator, restValues)).size();
+    }
+
     public void checkToCheckBox (WebDriver driver, String locator){
         if(!isElementSelected(driver, locator)){
             getWebElement(driver, locator).click();
@@ -344,7 +350,7 @@ public class BasePage {
 
     public void checkToCheckBox (WebDriver driver, String locator, String... restValues){
         if(!isElementSelected(driver, castParameter(locator, restValues))){
-            getWebElement(driver, locator).click();
+            getWebElement(driver, castParameter(locator, restValues)).click();
         }
     }
 

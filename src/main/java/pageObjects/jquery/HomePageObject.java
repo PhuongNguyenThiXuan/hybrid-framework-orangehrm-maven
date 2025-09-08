@@ -3,7 +3,11 @@ package pageObjects.jquery;
 import core.BasePage;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import pageUIs.jquery.HomePageUI;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomePageObject extends BasePage {
 
@@ -32,5 +36,63 @@ public class HomePageObject extends BasePage {
     public boolean isPageInfoDisplayed(String female, String country, String male, String total) {
         waitElementVisible(driver, HomePageUI.DYNAMIC_PAGE_INFO, female, country, male, total);
         return isElementDisplayed(driver, HomePageUI.DYNAMIC_PAGE_INFO, female, country, male, total);
+    }
+
+    public void clickToActionByCountryName(String countryName, String actionName) {
+        waitElementClickable(driver, HomePageUI.DYNAMIC_ACTION_BY_COUNTRY_NAME, countryName, actionName);
+        clickToElement(driver, HomePageUI.DYNAMIC_ACTION_BY_COUNTRY_NAME, countryName, actionName);
+    }
+
+    public void clickLoadDataButton() {
+        waitElementClickable(driver, HomePageUI.LOAD_DATA_BUTTON);
+        clickToElement(driver, HomePageUI.LOAD_DATA_BUTTON);
+    }
+
+    public void enterToTextBoxByColumnNameAndRowIndex(String columnName, String rowIndex, String valueToSend) {
+        waitListElementVisible(driver, HomePageUI.DYNAMIC_COLUMN_INDEX_BY_COLUMN_NAME, columnName);
+        int columnIndex = getListElementNumber(driver, HomePageUI.DYNAMIC_COLUMN_INDEX_BY_COLUMN_NAME, columnName) + 1;
+
+        waitListElementVisible(driver, HomePageUI.DYNAMIC_TEXTBOX_BY_ROW_INDEX_AND_COLUMN_INDEX, rowIndex, String.valueOf(columnIndex));
+        sendKey(driver, HomePageUI.DYNAMIC_TEXTBOX_BY_ROW_INDEX_AND_COLUMN_INDEX, valueToSend, rowIndex, String.valueOf(columnIndex));
+    }
+
+    public void selectToDropDownByColumnNameAndRowIndex(String columnName, String rowIndex, String valueToSend) {
+        waitListElementVisible(driver, HomePageUI.DYNAMIC_DROPDOWN_BY_ROW_INDEX_AND_COLUMN_INDEX, columnName);
+        int columnIndex = getListElementNumber(driver, HomePageUI.DYNAMIC_DROPDOWN_BY_ROW_INDEX_AND_COLUMN_INDEX, columnName) + 1;
+
+        waitElementClickable(driver, HomePageUI.DYNAMIC_DROPDOWN_BY_ROW_INDEX_AND_COLUMN_INDEX, rowIndex, String.valueOf(columnIndex));
+        selectItemInDropdown(driver, HomePageUI.DYNAMIC_DROPDOWN_BY_ROW_INDEX_AND_COLUMN_INDEX, valueToSend, rowIndex, String.valueOf(columnIndex));
+    }
+
+    public void checkToCheckBoxByColumnNameAndRowIndex(String columnName, String rowIndex) {
+        waitListElementVisible(driver, HomePageUI.DYNAMIC_CHECKBOX_BY_ROW_INDEX_AND_COLUMN_INDEX, columnName);
+        int columnIndex = getListElementNumber(driver, HomePageUI.DYNAMIC_CHECKBOX_BY_ROW_INDEX_AND_COLUMN_INDEX, columnName) + 1;
+
+        waitElementClickable(driver, HomePageUI.DYNAMIC_CHECKBOX_BY_ROW_INDEX_AND_COLUMN_INDEX, rowIndex, String.valueOf(columnIndex));
+        checkToCheckBox(driver, HomePageUI.DYNAMIC_CHECKBOX_BY_ROW_INDEX_AND_COLUMN_INDEX, rowIndex, String.valueOf(columnIndex));
+    }
+
+    public void actionToRowByRowIndex(String rowIndex, String actionName) {
+        waitElementClickable(driver, HomePageUI.DYNAMIC_ACTION_BY_ROW_INDEX, rowIndex, actionName);
+        clickToElement(driver, HomePageUI.DYNAMIC_ACTION_BY_ROW_INDEX, rowIndex, actionName);
+    }
+
+    public List<String> getColumnAllValueByColumnName(String columnName) {
+        List<WebElement> allPage = getListWebElements(driver, HomePageUI.ALL_PAGE, columnName);
+        List<String> columnAllValue = new ArrayList<String>();
+
+        waitListElementVisible(driver, HomePageUI.DYNAMIC_INDEX_BY_COLUMN_NAME, columnName);
+        int columnIndex = getListElementNumber(driver, HomePageUI.DYNAMIC_INDEX_BY_COLUMN_NAME, columnName) + 1;
+
+        for(WebElement page : allPage){
+            page.click();
+
+            List<WebElement> columnAllValueElement = getListWebElements(driver, HomePageUI.DYNAMIC_COLUMN_INDEX, String.valueOf(columnIndex));
+
+            for (WebElement value : columnAllValueElement){
+                columnAllValue.add(value.getText());
+            }
+        }
+        return columnAllValue;
     }
 }
