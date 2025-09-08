@@ -73,13 +73,13 @@ public class Level_12_DataTable extends BaseTest {
         homePage.enterToTextBoxByColumnNameAndRowIndex("Company", "2", "Company");
         homePage.enterToTextBoxByColumnNameAndRowIndex("Contact Person", "2", "Contact");
         homePage.enterToTextBoxByColumnNameAndRowIndex("Order Placed", "2", "11");
-        //homePage.selectToDropDownByColumnNameAndRowIndex("Country", "2", "Japan");
-        //homePage.checkToCheckBoxByColumnNameAndRowIndex("NPO?", "2");
+        homePage.selectToDropDownByColumnNameAndRowIndex("Country", "2", "Japan");
+        homePage.checkToCheckBoxByColumnNameAndRowIndex("NPO?", "2");
         homePage.actionToRowByRowIndex("2", "Insert");
 
     }
 
-    @Test
+    @Test (enabled = true)
     public void Table_05_Get_All_Value() {
         List<String> countryActualValue =  homePage.getColumnAllValueByColumnName("Country");
         System.out.println(countryActualValue);
