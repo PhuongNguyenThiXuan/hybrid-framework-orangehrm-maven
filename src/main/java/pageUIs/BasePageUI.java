@@ -10,4 +10,8 @@ public class BasePageUI {
     public static final String USER_CONTINUE_BUTTON = "xpath=//a[contains(text(),'Continue')]";
     public static final String ADMIN_LOGOUT_BUTTON = "xpath=//span[contains(text(),'Logout')]";
     public static final String USER_HOME_LOGO = "css=div#logo>a";
+
+    //jQuery
+    public static final String UPLOAD_FILE_TYPE = "css=input[type='file']";
+
 }

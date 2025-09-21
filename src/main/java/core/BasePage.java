@@ -536,6 +536,11 @@ public class BasePage {
                 .until(ExpectedConditions.elementToBeClickable(getByLocator(locator)));
     }
 
+    public WebElement waitElementClickable (WebDriver driver, WebElement element){
+        return new WebDriverWait(driver, Duration.ofSeconds(LONG_TIMEOUT))
+                .until(ExpectedConditions.elementToBeClickable(element));
+    }
+
     public WebElement waitElementClickable (WebDriver driver, String locator, String... restValue){
         return new WebDriverWait(driver, Duration.ofSeconds(LONG_TIMEOUT))
                 .until(ExpectedConditions.elementToBeClickable(getByLocator(castParameter(locator, restValue))));
@@ -569,6 +574,16 @@ public class BasePage {
     public List<WebElement> waitListElementPresence (WebDriver driver, String locator){
         return new WebDriverWait(driver, Duration.ofSeconds(LONG_TIMEOUT))
                 .until(ExpectedConditions.presenceOfAllElementsLocatedBy(getByLocator(locator)));
+    }
+
+    public void uploadMultipleFiles (WebDriver driver, String... fileNames){
+        String filePath = GlobalConstants.UPLOAD_PATH;
+        String fullFileName = "";
+
+        for (String file : fileNames){
+            fullFileName = fullFileName + filePath + file + "\n";
+        }
+        getWebElement(driver, BasePageUI.UPLOAD_FILE_TYPE).sendKeys(fullFileName.trim());
     }
 
     //orangehrm

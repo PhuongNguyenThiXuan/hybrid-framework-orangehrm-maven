@@ -20,5 +20,9 @@ public class HomePageUI {
     public static final String DYNAMIC_INDEX_BY_COLUMN_NAME = "xpath=//div[text()='%s']/ancestor::th/preceding-sibling::th";
     public static final String DYNAMIC_COLUMN_INDEX = "xpath=//td[%s]";
 
+    //jquery upload
+    public static final String IS_FILE_LOADED = "xpath=//p[@class='name' and text()='%s']";
+    public static final String IS_FILE_UPLOADED = "xpath=//p[@class='name']/a[text()='%s']";
+    public static final String START_UPLOAD_BUTTON = "CSS=table button.start";
 }
 
