@@ -1,11 +1,12 @@
 package core;
 
-
-import org.openqa.selenium.Point;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.manager.SeleniumManagerOutput;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.Assert;
 import org.testng.Reporter;
@@ -18,6 +19,12 @@ import static core.BrowserList.*;
 //Parent class cho các test.java.com.orangehrm
 public class BaseTest {
     private WebDriver driver;
+    protected final Logger log;
+
+    public BaseTest() {
+        //this.log = LogFactory.getLog(getClass()); //Run with log4j
+        this.log = LogManager.getLogger(getClass());
+    }
 
     protected WebDriver getBrowserDriver(String appURL, String browserName){
         BrowserList browserList = BrowserList.valueOf(browserName.toUpperCase());
@@ -39,22 +46,24 @@ public class BaseTest {
         }
         driver.get(appURL);
         //driver.manage().window().setPosition(new Point(0,0));
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30)); // chạy vs BasePageFactory phải cmt implicit
-        //driver.manage().window().maximize();
-        System.out.println("driver trong BaseTest: " + driver.toString());
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT)); // chạy vs BasePageFactory phải cmt implicit
+        driver.manage().window().maximize();
+        log.info("=============== INIT BROWSER & DRIVER ===============");
         return driver;
     }
 
     protected void closeBrowser(){
-        if (!(null == driver)){
+        if (null != driver){
             driver.quit();
         }
+        log.info("=============== CLOSE BROWSER & DRIVER ===============");
     }
 
     protected void closeBrowser (WebDriver driver){
-        if (!(null == driver)){
+        if (null != driver){
             driver.quit();
         }
+        log.info("=============== CLOSE BROWSER & DRIVER ===============");
     }
 
     protected int getRandomNumber(){
@@ -65,11 +74,13 @@ public class BaseTest {
         boolean pass = true;
         try {
             Assert.assertTrue(condition);
+            log.info("--------------- PASSED ---------------");
         } catch (Throwable e) {
             pass = false;
 
             VerificationFailures.getFailures().addFailureForTest(Reporter.getCurrentTestResult(), e);
             Reporter.getCurrentTestResult().setThrowable(e);
+            log.info("--------------- FAILED ---------------");
         }
         return pass;
     }
@@ -78,10 +89,12 @@ public class BaseTest {
         boolean pass = true;
         try {
             Assert.assertFalse(condition);
+            log.info("--------------- PASSED ---------------");
         } catch (Throwable e) {
             pass = false;
             VerificationFailures.getFailures().addFailureForTest(Reporter.getCurrentTestResult(), e);
             Reporter.getCurrentTestResult().setThrowable(e);
+            log.info("--------------- FAILED ---------------");
         }
         return pass;
     }
@@ -90,10 +103,12 @@ public class BaseTest {
         boolean pass = true;
         try {
             Assert.assertEquals(actual, expected);
+            log.info("--------------- PASSED ---------------");
         } catch (Throwable e) {
             pass = false;
             VerificationFailures.getFailures().addFailureForTest(Reporter.getCurrentTestResult(), e);
             Reporter.getCurrentTestResult().setThrowable(e);
+            log.info("--------------- FAILED ---------------");
         }
         return pass;
     }

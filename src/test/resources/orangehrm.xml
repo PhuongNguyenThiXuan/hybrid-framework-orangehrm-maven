@@ -10,7 +10,7 @@
     <test name="Run on FIREFOX">
         <parameter name="browser" value="firefox"></parameter>
         <classes>
-            <class name="com.orangehrm.Level_12_Assert_Verify"></class>
+            <class name="com.orangehrm.Level_13_Logging"></class>
         </classes>
     </test>
 </suite>
