@@ -11,7 +11,7 @@
     <test name="Run on FIREFOX">
         <parameter name="browser" value="firefox"></parameter>
         <classes>
-            <class name="com.orangehrm.Level_14_Logging"></class>
+            <class name="com.orangehrm.Level_14_Extent3"></class>
         </classes>
     </test>
 </suite>
