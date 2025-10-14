@@ -36,8 +36,8 @@ public class GlobalConstants {
     public static final String BROWSER_EXTENSION_PATH = PROJECT_PATH + File.separator + "browserExtensions" + File.separator;
 
     //HTML Report folder
-    public static final String REPORTING_PATH=PROJECT_PATH + File.separator + "" + File.separator;
-    public static final String EXTENT_PATH=PROJECT_PATH + File.separator + "" + File.separator;
+    public static final String REPORTING_PATH=PROJECT_PATH + File.separator + "htmlReport" + File.separator;
+    public static final String EXTENT_PATH=PROJECT_PATH + File.separator + "htmlReport" + File.separator;
     public static final String ALLURE_PATH=PROJECT_PATH + File.separator + "" + File.separator;
 
     //Date Test/ Environment

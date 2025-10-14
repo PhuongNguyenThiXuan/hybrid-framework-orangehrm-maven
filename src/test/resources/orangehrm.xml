@@ -3,6 +3,7 @@
 <suite name="OrangeHRM UI Automation Test" verbose="1" >
     <listeners>
         <listener class-name="core.MethodListener"></listener>
+        <listener class-name="reportConfig.ExtentTestListener"></listener>
     </listeners>
     
     <parameter name="appUrl" value="http://localhost/orangehrm"></parameter>
@@ -10,7 +11,7 @@
     <test name="Run on FIREFOX">
         <parameter name="browser" value="firefox"></parameter>
         <classes>
-            <class name="com.orangehrm.Level_13_Logging"></class>
+            <class name="com.orangehrm.Level_14_Logging"></class>
         </classes>
     </test>
 </suite>

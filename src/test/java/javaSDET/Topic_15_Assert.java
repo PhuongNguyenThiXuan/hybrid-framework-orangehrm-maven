@@ -3,9 +3,9 @@ package javaSDET;
 import com.google.common.collect.*;
 import org.testng.annotations.Test;
 
-import static org.assertj.core.util.Lists.newArrayList;
+//import static org.assertj.core.util.Lists.newArrayList;
 //import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+//import static org.hamcrest.Matchers.*;
 
 //import static org.assertj.core.api.Assertions.*;
 
