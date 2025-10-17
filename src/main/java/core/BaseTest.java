@@ -9,16 +9,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.manager.SeleniumManagerOutput;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.Assert;
 import org.testng.Reporter;
-import reportConfig.ExtentManager;
 
 import java.time.Duration;
 import java.util.Random;
-
-import static core.BrowserList.*;
 
 //Parent class cho các test.java.com.orangehrm
 public class BaseTest {

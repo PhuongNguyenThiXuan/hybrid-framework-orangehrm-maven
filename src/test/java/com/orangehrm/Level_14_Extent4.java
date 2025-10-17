@@ -17,7 +17,7 @@ import pageObjects.orangeHRM.editNavigation.PersonalDetailsPageObject;
 import java.lang.reflect.Method;
 
 
-public class Level_14_Extent3 extends BaseTest{
+public class Level_14_Extent4 extends BaseTest{
     private String appUrl;
 
     @Parameters({"appUrl", "browser"})
@@ -35,7 +35,7 @@ public class Level_14_Extent3 extends BaseTest{
     }
 
     @Test (enabled = true)
-    public void Employee_01_CreateNewEmployee(Method method){
+    public void Employee_01_CreateNewEmployee(){
         loginPage.enterToUserNameTextBox(adminUsername);
         loginPage.enterToPasswordTextBox(adminPassword);
 
@@ -45,7 +45,10 @@ public class Level_14_Extent3 extends BaseTest{
 
         employeeListPage = dashboardPage.clickToPIMModule();
         Assert.assertTrue(employeeListPage.isLoadingSpinnerDisappear(driver));
+    }
 
+    @Test
+    public void Employee_02_ViewEmployee(){
         addEmployeePage = employeeListPage.clickAddEmployeeButton();
         Assert.assertTrue(addEmployeePage.isLoadingSpinnerDisappear(driver));
 
@@ -53,11 +56,17 @@ public class Level_14_Extent3 extends BaseTest{
         addEmployeePage.enterToMiddleNameTextBox(employeeMiddleName);
         addEmployeePage.enterToLastNameTextBox(employeeLastName);
         employeeID = addEmployeePage.getEmployeeID();
+    }
 
+    @Test
+    public void Employee_03_EditEmployee(){
         personalDetailPage = addEmployeePage.clickSaveButton();
         Assert.assertTrue(personalDetailPage.isLoadingSpinnerDisappear(driver));
         personalDetailPage.sleepInSecond(2);
+    }
 
+    @Test
+    public void Employee_04_RemoveEmployee(){
         //Assert.assertEquals(personalDetailPage.getFirstNameTextBoxValue(),employeeFirstName);
         Assert.assertEquals(personalDetailPage.getFirstNameTextBoxValue(),employeeMiddleName);
 
@@ -67,6 +76,7 @@ public class Level_14_Extent3 extends BaseTest{
 
         Assert.assertEquals(personalDetailPage.getEmployeeIDTextBoxValue(),employeeID);
     }
+
 
     @AfterClass
     public void quit(){

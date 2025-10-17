@@ -3,7 +3,6 @@ package com.orangehrm;
 //import com.relevantcodes.extentreports.LogStatus;
 import core.BaseTest;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -14,7 +13,6 @@ import pageObjects.orangeHRM.editNavigation.ContactDetailPageObject;
 import pageObjects.orangeHRM.editNavigation.DependencePageObject;
 import pageObjects.orangeHRM.editNavigation.JobPageObject;
 import pageObjects.orangeHRM.editNavigation.PersonalDetailsPageObject;
-import reportConfig.ExtentManager;
 
 import java.lang.reflect.Method;
 
