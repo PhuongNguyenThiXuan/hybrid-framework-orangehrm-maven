@@ -3,7 +3,7 @@
 <suite name="OrangeHRM UI Automation Test" verbose="1" >
     <listeners>
         <listener class-name="core.MethodListener"></listener>
-        <listener class-name="reportConfig.ChainTestReport"></listener>
+        <listener class-name="reportConfig.AllureTestListener"></listener>
     </listeners>
     
     <parameter name="appUrl" value="http://localhost/orangehrm"></parameter>
@@ -11,21 +11,21 @@
     <test name="Run on FIREFOX">
         <parameter name="browser" value="firefox"></parameter>
         <classes>
-            <class name="com.orangehrm.Level_15_ChainTest"></class>
+            <class name="com.orangehrm.Level_16_Allure"></class>
         </classes>
     </test>
 
-    <test name="Run on CHROME">
-        <parameter name="browser" value="CHROME"></parameter>
-        <classes>
-            <class name="com.orangehrm.Level_15_ChainTest"></class>
-        </classes>
-    </test>
+<!--    <test name="Run on CHROME">-->
+<!--        <parameter name="browser" value="CHROME"></parameter>-->
+<!--        <classes>-->
+<!--            <class name="com.orangehrm.Level_16_Allure"></class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <!-- <test name="Run on SAFARI">
         <parameter name="browser" value="SAFARI"></parameter>
         <classes>
-            <class name="com.orangehrm.Level_14_Extent5"></class>
+            <class name="com.orangehrm.Level_16_Allure"></class>
         </classes>
     </test> -->
 
