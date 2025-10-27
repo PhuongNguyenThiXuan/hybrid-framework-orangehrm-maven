@@ -22,11 +22,11 @@ public class JiraServiceProvider {
     public void createJiraIssue(String issueType, String summary, String description) {
         try {
             // Avoid Creating Duplicate Issue
-            Issue.SearchResult sr = Jira.searchIssues("summary ~ \"" + summary + "\"");
-            if (sr.total != 0) {
-                System.out.println("Same Issue Already Exists on Jira");
-                return;
-            }
+//            Issue.SearchResult sr = Jira.searchIssues("summary ~ \"" + summary + "\"");
+//            if (sr.total != 0) {
+//                System.out.println("Same Issue Already Exists on Jira");
+//                return;
+//            }
 
             // Create issue if not exists
             FluentCreate fluentCreate = Jira.createIssue(projectKey, issueType);
