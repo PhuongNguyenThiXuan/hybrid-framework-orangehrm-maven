@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [OrangeHRM UI Automation Test]" guice-stage="DEVELOPMENT">
+  <parameter name="appUrl" value="http://localhost/orangehrm"/>
+  <listeners>
+    <listener class-name="core.MethodListener"/>
+    <listener class-name="jiraConfigs.JiraListener"/>
+  </listeners>
+  <test thread-count="5" name="Run on FIREFOX(failed)">
+    <parameter name="browser" value="firefox"/>
+    <classes>
+      <class name="com.orangehrm.Level_17_JIRA">
+        <methods>
+          <include name="deleteFileInReport"/>
+          <include name="Employee_04_RemoveEmployee"/>
+          <include name="quit"/>
+          <include name="beforeClass"/>
+        </methods>
+      </class> <!-- com.orangehrm.Level_17_JIRA -->
+    </classes>
+  </test> <!-- Run on FIREFOX(failed) -->
+</suite> <!-- Failed suite [OrangeHRM UI Automation Test] -->

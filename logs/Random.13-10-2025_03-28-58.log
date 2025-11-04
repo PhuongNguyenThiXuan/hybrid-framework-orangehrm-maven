@@ -1,0 +1,20 @@
+[13-10-2025 03:29:06.950 INFO com.orangehrm.Level_13_Logging] - =============== INIT BROWSER & DRIVER ===============
+[13-10-2025 03:29:06.970 INFO com.orangehrm.Level_13_Logging] - NewEmployee - STEP 01: Enter to Username and Password with info: automationfc | A@a123456!
+[13-10-2025 03:29:07.058 INFO com.orangehrm.Level_13_Logging] - NewEmployee - STEP 02: Navigate to Dashboard page
+[13-10-2025 03:29:10.793 INFO com.orangehrm.Level_13_Logging] - --------------- PASSED ---------------
+[13-10-2025 03:29:12.795 INFO com.orangehrm.Level_13_Logging] - NewEmployee - STEP 03: Navigate to Employee List page
+[13-10-2025 03:29:14.568 INFO com.orangehrm.Level_13_Logging] - --------------- PASSED ---------------
+[13-10-2025 03:29:14.568 INFO com.orangehrm.Level_13_Logging] - NewEmployee - STEP 04: Navigate to Add Employee page
+[13-10-2025 03:29:16.124 INFO com.orangehrm.Level_13_Logging] - --------------- PASSED ---------------
+[13-10-2025 03:29:16.125 INFO com.orangehrm.Level_13_Logging] - NewEmployee - STEP 05: Enter to First/Middle and Lastname with info: Hello | Test | World!
+[13-10-2025 03:29:16.212 INFO com.orangehrm.Level_13_Logging] - NewEmployee - STEP 06: Navigate to Personal Detail page
+[13-10-2025 03:29:23.559 INFO com.orangehrm.Level_13_Logging] - --------------- PASSED ---------------
+[13-10-2025 03:29:25.568 INFO com.orangehrm.Level_13_Logging] - NewEmployee - STEP 07: Verify FirstName displayed: Hello
+[13-10-2025 03:29:25.633 INFO com.orangehrm.Level_13_Logging] - --------------- FAILED ---------------
+[13-10-2025 03:29:25.633 INFO com.orangehrm.Level_13_Logging] - NewEmployee - STEP 08: Verify MiddleName displayed: Test
+[13-10-2025 03:29:25.648 INFO com.orangehrm.Level_13_Logging] - --------------- FAILED ---------------
+[13-10-2025 03:29:25.648 INFO com.orangehrm.Level_13_Logging] - NewEmployee - STEP 09: Verify LastName displayed: World!
+[13-10-2025 03:29:25.659 INFO com.orangehrm.Level_13_Logging] - --------------- PASSED ---------------
+[13-10-2025 03:29:25.660 INFO com.orangehrm.Level_13_Logging] - NewEmployee - STEP 10: Verify EmployeeID displayed: 0056
+[13-10-2025 03:29:25.670 INFO com.orangehrm.Level_13_Logging] - --------------- PASSED ---------------
+[13-10-2025 03:29:26.322 INFO com.orangehrm.Level_13_Logging] - =============== CLOSE BROWSER & DRIVER ===============

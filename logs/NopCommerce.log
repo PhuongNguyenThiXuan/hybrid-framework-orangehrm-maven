@@ -1,0 +1,20 @@
+[2025-10-07 06:11:20,209 com.orangehrm.Level_13_Logging] =============== INIT BROWSER & DRIVER ===============
+[2025-10-07 06:11:20,214 com.orangehrm.Level_13_Logging] NewEmployee - STEP 01: Enter to Username and Password with info: automationfc | A@a123456!
+[2025-10-07 06:11:20,283 com.orangehrm.Level_13_Logging] NewEmployee - STEP 02: Navigate to Dashboard page
+[2025-10-07 06:11:25,072 com.orangehrm.Level_13_Logging] --------------- PASSED ---------------
+[2025-10-07 06:11:27,089 com.orangehrm.Level_13_Logging] NewEmployee - STEP 03: Navigate to Employee List page
+[2025-10-07 06:11:29,189 com.orangehrm.Level_13_Logging] --------------- PASSED ---------------
+[2025-10-07 06:11:29,190 com.orangehrm.Level_13_Logging] NewEmployee - STEP 04: Navigate to Add Employee page
+[2025-10-07 06:11:30,427 com.orangehrm.Level_13_Logging] --------------- PASSED ---------------
+[2025-10-07 06:11:30,427 com.orangehrm.Level_13_Logging] NewEmployee - STEP 05: Enter to First/Middle and Lastname with info: Hello | Test | World!
+[2025-10-07 06:11:30,513 com.orangehrm.Level_13_Logging] NewEmployee - STEP 06: Navigate to Personal Detail page
+[2025-10-07 06:11:37,198 com.orangehrm.Level_13_Logging] --------------- PASSED ---------------
+[2025-10-07 06:11:39,199 com.orangehrm.Level_13_Logging] NewEmployee - STEP 07: Verify FirstName displayed: Hello
+[2025-10-07 06:11:39,239 com.orangehrm.Level_13_Logging] --------------- FAILED ---------------
+[2025-10-07 06:11:39,239 com.orangehrm.Level_13_Logging] NewEmployee - STEP 08: Verify MiddleName displayed: Test
+[2025-10-07 06:11:39,254 com.orangehrm.Level_13_Logging] --------------- FAILED ---------------
+[2025-10-07 06:11:39,255 com.orangehrm.Level_13_Logging] NewEmployee - STEP 09: Verify LastName displayed: World!
+[2025-10-07 06:11:39,269 com.orangehrm.Level_13_Logging] --------------- PASSED ---------------
+[2025-10-07 06:11:39,269 com.orangehrm.Level_13_Logging] NewEmployee - STEP 10: Verify EmployeeID displayed: 0051
+[2025-10-07 06:11:39,280 com.orangehrm.Level_13_Logging] --------------- PASSED ---------------
+[2025-10-07 06:11:39,738 com.orangehrm.Level_13_Logging] =============== CLOSE BROWSER & DRIVER ===============
