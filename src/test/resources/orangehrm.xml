@@ -3,7 +3,7 @@
 <suite name="OrangeHRM UI Automation Test" verbose="1" >
     <listeners>
         <listener class-name="core.MethodListener"></listener>
-        <listener class-name="jiraConfigs.JiraListener"></listener>
+<!--        <listener class-name="jiraConfigs.JiraListener"></listener>-->
     </listeners>
     
     <parameter name="appUrl" value="http://localhost/orangehrm"></parameter>
@@ -11,7 +11,7 @@
     <test name="Run on FIREFOX">
         <parameter name="browser" value="firefox"></parameter>
         <classes>
-            <class name="com.orangehrm.Level_17_JIRA"></class>
+            <class name="com.orangehrm.Level_18_Pattern_Object"></class>
         </classes>
     </test>
 

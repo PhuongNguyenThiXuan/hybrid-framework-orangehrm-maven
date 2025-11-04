@@ -629,4 +629,23 @@ public class BasePage {
         return PageGenerator.getPage(UserHomePO.class, driver);
     }
 
+    public void enterToTextboxLabel(WebDriver driver, String textboxLabel, String valueToSendkey){
+        waitElementVisible(driver, BasePageUI.TEXTBOX_BY_TEXT, textboxLabel);
+        sendKey(driver, BasePageUI.TEXTBOX_BY_TEXT, valueToSendkey, textboxLabel);
+    }
+
+    public void enterToTextboxName(WebDriver driver, String textboxNameAttribute, String valueToSendkey){
+        waitElementVisible(driver, BasePageUI.TEXTBOX_BY_NAME, textboxNameAttribute);
+        sendKey(driver, BasePageUI.TEXTBOX_BY_NAME, valueToSendkey, textboxNameAttribute);
+    }
+
+    public void clickToButtonByText(WebDriver driver, String buttonText){
+        waitElementClickable(driver, BasePageUI.BUTTON_BY_TEXT);
+        clickToElement(driver, BasePageUI.BUTTON_BY_TEXT, buttonText);
+    }
+
+    public void clickToButtonByTextInMainTitle(WebDriver driver, String buttonText, String mainTitleName){
+        waitElementClickable(driver, BasePageUI.BUTTON_BY_TEXT_IN_MAIN_TITLE, mainTitleName, buttonText);
+        clickToElement(driver, BasePageUI.BUTTON_BY_TEXT_IN_MAIN_TITLE, mainTitleName, buttonText);
+    }
 }
