@@ -11,7 +11,7 @@
     <test name="Run on FIREFOX">
         <parameter name="browser" value="firefox"></parameter>
         <classes>
-            <class name="com.orangehrm.Level_18_Pattern_Object"></class>
+            <class name="com.orangehrm.Level_19_Element_Undisplayed"></class>
         </classes>
     </test>
 

@@ -10,19 +10,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pageObjects.PageGenerator;
 import pageObjects.openCart.admin.AdminLoginPO;
 import pageObjects.openCart.user.UserHomePO;
+import pageObjects.orangeHRM.LoginPageObject;
 import pageUIs.BasePageUI;
-import pageUIs.openCart.user.UserHomePageUI;
 
 import java.time.Duration;
+import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 //Parent class cho các class thuộc main.java.pageObjects
 //La abstract class => cho phep cac class con dieu chinh de su dung lai
 public class BasePage {
-    private final long SHORT_TIMEOUT = 10;
-    private final long LONG_TIMEOUT = 30;
-
     //      1 - Access Modifier:
     //          public: tất cả các class trong cùng/không cùng package đều sử dụng được. Nếu muốn class nào kế thừa mới được dùng => thì ko khai báo public
     //          protected: chỉ class nào kế thừa mới dùng được
@@ -267,14 +266,12 @@ public class BasePage {
                 .isMultiple();
     }
 
-    public void selectItemInCustomDropdown(WebDriver driver, String dropdownName, String listValue, String value){
+    public void selectItemInSelectTableDropdown(WebDriver driver, String dropdownName, String listValue, String value){
         clickToElement(driver, dropdownName);
         sleepInSecond(1);
 
-        new WebDriverWait(driver,Duration.ofSeconds(LONG_TIMEOUT)).until(ExpectedConditions
+        List<WebElement> allItems = new WebDriverWait(driver,Duration.ofSeconds(LONG_TIMEOUT)).until(ExpectedConditions
                 .presenceOfAllElementsLocatedBy(By.cssSelector(listValue)));
-
-        List<WebElement> allItems = getListWebElements(driver, listValue);
 
         for (WebElement item : allItems){
             if(item.getText().equals(value)){
@@ -285,14 +282,12 @@ public class BasePage {
         }
     }
 
-    public void selectItemInCustomDropdown(WebDriver driver, String dropdownName, String listValue, String value, String... restValues){
+    public void selectItemInSelectTableDropdown(WebDriver driver, String dropdownName, String listValue, String value, String... restValues){
         clickToElement(driver, castParameter(dropdownName, restValues));
         sleepInSecond(1);
 
-        new WebDriverWait(driver,Duration.ofSeconds(LONG_TIMEOUT)).until(ExpectedConditions
-                .presenceOfAllElementsLocatedBy(By.cssSelector(listValue)));
-
-        List<WebElement> allItems = getListWebElements(driver, listValue);
+        List<WebElement> allItems = new WebDriverWait(driver,Duration.ofSeconds(LONG_TIMEOUT))
+                .until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector(listValue)));
 
         for (WebElement item : allItems){
             if(item.getText().equals(value)){
@@ -315,11 +310,11 @@ public class BasePage {
         return getWebElement(driver, castParameter(locator, restValues)).getDomAttribute(attributeName);
     }
 
-    public String getDOMProperty (WebDriver driver, String locator, String propertyName){
+    public String getElementDOMProperty(WebDriver driver, String locator, String propertyName){
         return getWebElement(driver, locator).getDomProperty(propertyName);
     }
 
-    public String getDOMProperty (WebDriver driver, String locator, String propertyName, String... restValues){
+    public String getElementDOMProperty(WebDriver driver, String locator, String propertyName, String... restValues){
         return getWebElement(driver, castParameter(locator, restValues)).getDomProperty(propertyName);
     }
 
@@ -369,23 +364,71 @@ public class BasePage {
 
 
     public boolean isElementDisplayed (WebDriver driver, String locator){
-        waitListElementVisible(driver, locator);
-        return getWebElement(driver, locator).isDisplayed();
+        boolean status = false;
+        try {
+            //Trường hợp 1: Element có hiển thị ở trên UI và có xuất hiện ở trong DOM (Visible/ Displayed) => true
+            //Trường hợp 2: Element không hiển thị ở trên UI và có xuất hiện ở trong DOM (Invisible) => false
+            return getWebElement(driver, locator).isDisplayed();
+        } catch (NoSuchElementException e) {
+            //Trường hợp 3: Element không hiển thị ở trên UI và không có ở trong DOM (Invisible)=> false
+            return status;
+        }
     }
 
     public boolean isElementDisplayed (WebDriver driver, String locator, String... restValues){
-        waitListElementVisible(driver, castParameter(locator, restValues));
-        return getWebElement(driver, castParameter(locator, restValues)).isDisplayed();
+        boolean status = false;
+        try {
+            return getWebElement(driver, castParameter(locator, restValues)).isDisplayed();
+        } catch (NoSuchElementException e) {
+            return status;
+        }
     }
 
+    private void overrideGlobalTimeout (WebDriver driver, long timeInSecond){
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(timeInSecond));
+    }
+
+    public boolean isElementUndisplayed(WebDriver driver, String locator) {
+        overrideGlobalTimeout(driver, SHORT_TIMEOUT);
+        List<WebElement> elements = getListWebElements(driver, locator);
+        overrideGlobalTimeout(driver, LONG_TIMEOUT);
+
+        if (elements.size() == 0) {
+            return true;
+        } else if (elements.size() > 0 && !elements.get(0).isDisplayed()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isElementUndisplayed(WebDriver driver, String locator, String... restValues) {
+        System.out.println("Start time = " + new Date().toString());
+        overrideGlobalTimeout(driver, SHORT_TIMEOUT);
+        List<WebElement> elements = getListWebElements(driver, castParameter(locator, restValues));
+        overrideGlobalTimeout(driver, LONG_TIMEOUT);
+
+        if (elements.size() == 0) {
+            System.out.println("Trường hợp 3: Element không hiển thị ở trên UI và không có ở trong DOM (Invisible)");
+            System.out.println("End time = " + new Date().toString());
+            return true;
+        } else if (elements.size() > 0 && !elements.get(0).isDisplayed()) {
+            System.out.println("Trường hợp 2: Element không hiển thị ở trên UI và có xuất hiện ở trong DOM (Invisible)");
+            System.out.println("End time = " + new Date().toString());
+            return true;
+        } else {
+            System.out.println("Trường hợp 1: Element có hiển thị ở trên UI và có xuất hiện ở trong DOM (Visible/ Displayed)");
+            return false;
+        }
+    }
+
+
     public boolean isElementSelected (WebDriver driver, String locator){
-        //waitElementSelected(driver, locator);
         waitElementVisible(driver, locator);
         return getWebElement(driver, locator).isSelected();
     }
 
     public boolean isElementSelected (WebDriver driver, String locator, String... restValues){
-        //waitElementSelected(driver, locator);
         waitElementVisible(driver, castParameter(locator, restValues));
         return getWebElement(driver, castParameter(locator, restValues)).isSelected();
     }
@@ -557,6 +600,11 @@ public class BasePage {
                 .until(ExpectedConditions.invisibilityOfElementLocated(getByLocator(castParameter(locator, restValues))));
     }
 
+    public boolean waitElementInvisibleNotInDOM (WebDriver driver, String locator, String... restValues){
+        return new WebDriverWait(driver, Duration.ofSeconds(SHORT_TIMEOUT))
+                .until(ExpectedConditions.invisibilityOfElementLocated(getByLocator(castParameter(locator, restValues))));
+    }
+
     public boolean waitListElementInvisible (WebDriver driver, String locator){
         return new WebDriverWait(driver, Duration.ofSeconds(LONG_TIMEOUT))
                 .until(ExpectedConditions.invisibilityOfAllElements(getListWebElements(driver, locator)));
@@ -587,14 +635,7 @@ public class BasePage {
         getWebElement(driver, BasePageUI.UPLOAD_FILE_TYPE).sendKeys(fullFileName.trim());
     }
 
-    //orangehrm
-    @Step("Waiting for Loading Spinner disappear")
-    public boolean isLoadingSpinnerDisappear (WebDriver driver){
-        return waitListElementInvisible(driver, BasePageUI.SPINNER_ICON);
-    }
-
     //opencart
-
     public UserHomePO clickToLogoutLinkAtUserSite (WebDriver driver) {
         waitElementClickable(driver, BasePageUI.USER_MY_ACCOUNT_HEADER);
         clickToElement(driver, BasePageUI.USER_MY_ACCOUNT_HEADER);
@@ -629,18 +670,27 @@ public class BasePage {
         return PageGenerator.getPage(UserHomePO.class, driver);
     }
 
-    public void enterToTextboxLabel(WebDriver driver, String textboxLabel, String valueToSendkey){
-        waitElementVisible(driver, BasePageUI.TEXTBOX_BY_TEXT, textboxLabel);
-        sendKey(driver, BasePageUI.TEXTBOX_BY_TEXT, valueToSendkey, textboxLabel);
+    //orangehrm
+    @Step("Waiting for Loading Spinner disappear")
+    public boolean isLoadingSpinnerDisappear (WebDriver driver){
+        return waitListElementInvisible(driver, BasePageUI.SPINNER_ICON);
     }
 
-    public void enterToTextboxName(WebDriver driver, String textboxNameAttribute, String valueToSendkey){
+    @Step("Enter to {0} textbox by label with value {1}")
+    public void enterToTextboxByLabel(WebDriver driver, String textboxLabel, String valueToSendkey){
+        waitElementVisible(driver, BasePageUI.TEXTBOX_BY_LABEL, textboxLabel);
+        sendKey(driver, BasePageUI.TEXTBOX_BY_LABEL, valueToSendkey, textboxLabel);
+    }
+
+    @Step("Enter to {0} textbox by name with value {1}")
+    public void enterToTextboxByName(WebDriver driver, String textboxNameAttribute, String valueToSendkey){
         waitElementVisible(driver, BasePageUI.TEXTBOX_BY_NAME, textboxNameAttribute);
         sendKey(driver, BasePageUI.TEXTBOX_BY_NAME, valueToSendkey, textboxNameAttribute);
     }
 
+    @Step("Click to {0} button by text")
     public void clickToButtonByText(WebDriver driver, String buttonText){
-        waitElementClickable(driver, BasePageUI.BUTTON_BY_TEXT);
+        waitElementClickable(driver, BasePageUI.BUTTON_BY_TEXT, buttonText);
         clickToElement(driver, BasePageUI.BUTTON_BY_TEXT, buttonText);
     }
 
@@ -648,4 +698,65 @@ public class BasePage {
         waitElementClickable(driver, BasePageUI.BUTTON_BY_TEXT_IN_MAIN_TITLE, mainTitleName, buttonText);
         clickToElement(driver, BasePageUI.BUTTON_BY_TEXT_IN_MAIN_TITLE, mainTitleName, buttonText);
     }
+
+    public String getTextboxValueByName(WebDriver driver, String textboxNameAttribute){
+        waitElementVisible(driver, BasePageUI.TEXTBOX_BY_NAME, textboxNameAttribute);
+        return getElementDOMProperty(driver, BasePageUI.TEXTBOX_BY_NAME, "value", textboxNameAttribute);
+        //getDOMProperty (WebDriver driver, String locator, String propertyName, String... restValues)
+    }
+
+    public String getTextboxValueByLabel(WebDriver driver, String textboxLabel){
+        waitElementVisible(driver, BasePageUI.TEXTBOX_BY_LABEL, textboxLabel);
+        return getElementDOMProperty(driver, BasePageUI.TEXTBOX_BY_LABEL, "value", textboxLabel);
+        //getDOMProperty (WebDriver driver, String locator, String propertyName, String... restValues)
+    }
+
+    @Step("Click to {0} module in Menu item")
+    public void clickToModuleByTextInMenuItem(WebDriver driver, String moduleName) {
+        waitElementClickable(driver, BasePageUI.MODULE_BY_TEXT_IN_MENU_ITEM, moduleName);
+        clickToElement(driver, BasePageUI.MODULE_BY_TEXT_IN_MENU_ITEM, moduleName);
+    }
+
+    public boolean isModuleByTextInMenuItemDisplayed(WebDriver driver, String moduleName) {
+        waitElementVisible(driver, BasePageUI.MODULE_BY_TEXT_IN_MENU_ITEM, moduleName);
+        return isElementDisplayed(driver, BasePageUI.MODULE_BY_TEXT_IN_MENU_ITEM, moduleName);
+    }
+
+    public boolean isModuleByTextInMenuItemUnDisplayed(WebDriver driver, String moduleName) {
+        //waitElementInvisibleNotInDOM(driver, BasePageUI.MODULE_BY_TEXT_IN_MENU_ITEM, moduleName); //5s => co the bo luon de do ton tgian
+        return isElementUndisplayed(driver, BasePageUI.MODULE_BY_TEXT_IN_MENU_ITEM, moduleName); //5s
+    }
+
+    public void selectDropdownByLabel(WebDriver driver, String labelName, String valueToSelect) {
+        waitElementVisible(driver, BasePageUI.PARENT_DROPDOWN_BY_LABEL, labelName);
+        selectItemInSelectTableDropdown(driver, BasePageUI.PARENT_DROPDOWN_BY_LABEL, BasePageUI.CHILD_DROPDOWN_BY_LABEL, valueToSelect, labelName);
+    }
+
+    public boolean isToastMessageDisplayed(WebDriver driver, String toastMessage) {
+        waitElementVisible(driver, BasePageUI.TOAST_MESSAGE_BY_TEXT, toastMessage);
+        return isElementDisplayed(driver, BasePageUI.TOAST_MESSAGE_BY_TEXT, toastMessage);
+    }
+
+    public void clickToRadioByLabel(WebDriver driver, String labelName) {
+        //waitElementClickable(driver, BasePageUI.RADIO_BUTTON_BY_LABEL, labelName);
+        clickToElement(driver, BasePageUI.RADIO_BUTTON_BY_LABEL, labelName);
+    }
+
+    public void clickToCheckboxByLabel(WebDriver driver, String labelName) {
+        waitElementClickable(driver, BasePageUI.CHECKBOX_BY_LABEL, labelName);
+        clickToElement(driver, BasePageUI.CHECKBOX_BY_LABEL, labelName);
+    }
+
+    public LoginPageObject clickLogoutOnTopMenu(WebDriver driver){
+        waitElementClickable(driver, BasePageUI.USER_DROPDOWN);
+        clickToElement(driver, BasePageUI.USER_DROPDOWN);
+        waitElementClickable(driver, BasePageUI.LOGOUT_LINK);
+        clickToElement(driver, BasePageUI.LOGOUT_LINK);
+        return PageGenerator.getPage(LoginPageObject.class,driver);
+    }
+
+    private final long SHORT_TIMEOUT = GlobalConstants.SHORT_TIMEOUT;
+    private final long LONG_TIMEOUT = GlobalConstants.LONG_TIMEOUT;
+
+
 }

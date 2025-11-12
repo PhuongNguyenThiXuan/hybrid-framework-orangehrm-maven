@@ -1,1 +1,0 @@
-{"uuid":"a96dd5fc-dbc0-44c1-8069-e316eacc23a1","name":"OrangeHRM UI Automation Test","children":["f014f1fb-bf7c-4da7-b82a-1db9b55fc28b"],"befores":[{"name":"deleteFileInReport","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1762263000599,"stop":1762263000606}],"afters":[],"start":1762263000582,"stop":1762263042289}

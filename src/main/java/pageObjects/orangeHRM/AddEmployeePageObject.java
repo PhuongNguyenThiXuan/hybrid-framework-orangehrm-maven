@@ -4,7 +4,6 @@ import core.BasePage;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import pageObjects.orangeHRM.editNavigation.PersonalDetailsPageObject;
-import pageUIs.openCart.user.UserLoginPageUI;
 import pageUIs.orangeHRM.AddEmployeePageUI;
 
 public class AddEmployeePageObject extends BasePage {
@@ -35,7 +34,7 @@ public class AddEmployeePageObject extends BasePage {
     @Step("Get EmployeeID")
     public String getEmployeeID() {
         waitElementVisible (driver, AddEmployeePageUI.EMPLOYEE_ID_TEXT_BOX);
-        return getDOMProperty(driver, AddEmployeePageUI.EMPLOYEE_ID_TEXT_BOX, "value");
+        return getElementDOMProperty(driver, AddEmployeePageUI.EMPLOYEE_ID_TEXT_BOX, "value");
     }
 
     @Step("Click Save button and navigate to PersonalDetails page")
