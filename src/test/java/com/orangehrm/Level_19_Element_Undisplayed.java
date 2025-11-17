@@ -97,6 +97,7 @@ public class Level_19_Element_Undisplayed extends BaseTest{
         loginPage.enterToTextboxByLabel(driver, "Password", employeePassword);
         loginPage.clickToButtonByText(driver, "Login");
         dashboardPage = PageGenerator.getPage(DashboardPageObject.class, driver);
+        dashboardPage.sleepInSecond(2);
 
         //verify left menu
         verifyTrue(dashboardPage.isModuleByTextInMenuItemDisplayed (driver, "Leave"));

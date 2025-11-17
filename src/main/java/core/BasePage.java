@@ -72,11 +72,21 @@ public class BasePage {
         driver.navigate().refresh();
     }
 
+    public Set<Cookie> getPageCookies (WebDriver driver){
+        return driver.manage().getCookies();
+    }
+
+    public void setPageCookies (WebDriver driver, Set<Cookie> cookies){
+        for(Cookie cookie:cookies){
+            driver.manage().addCookie(cookie);
+        }
+    }
+
     public Alert waitAlertPresence (WebDriver driver){
         return new WebDriverWait(driver, Duration.ofSeconds(LONG_TIMEOUT)).until(ExpectedConditions.alertIsPresent());
     }
 
-    public void acceptAlert (WebDriver driver){
+    public void acceptToAlert(WebDriver driver){
         waitAlertPresence(driver).accept();
     }
 
@@ -757,6 +767,4 @@ public class BasePage {
 
     private final long SHORT_TIMEOUT = GlobalConstants.SHORT_TIMEOUT;
     private final long LONG_TIMEOUT = GlobalConstants.LONG_TIMEOUT;
-
-
 }
