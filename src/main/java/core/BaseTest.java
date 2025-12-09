@@ -15,6 +15,7 @@ import org.testng.Reporter;
 import org.testng.annotations.BeforeSuite;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.Random;
 
@@ -49,7 +50,7 @@ public class BaseTest {
         driver.get(appURL);
         //driver.manage().window().setPosition(new Point(0,0));
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(GlobalConstants.LONG_TIMEOUT)); // chạy vs BasePageFactory phải cmt implicit
-        driver.manage().window().maximize();
+        //driver.manage().window().maximize();
         //log.info("=============== INIT BROWSER & DRIVER ===============");
         return driver;
     }
@@ -59,8 +60,45 @@ public class BaseTest {
     }
 
     protected void closeBrowser(){
-        if (null != driver){
-            driver.quit();
+        String cmd = null;
+        try {
+            String osName = GlobalConstants.OS_NAME.toLowerCase();
+            String driverInstanceName = driver.toString().toLowerCase();
+            String browserDriverName = null;
+
+            if (driverInstanceName.contains("chrome")) {
+                browserDriverName = "chromedriver";
+            } else if (driverInstanceName.contains("firefox")) {
+                browserDriverName = "geckodriver";
+            } else if (driverInstanceName.contains("edge")) {
+                browserDriverName = "msedgedriver";
+            } else if (driverInstanceName.contains("safari")) {
+                browserDriverName = "safaridriver";
+            } else {
+                throw new RuntimeException("Driver instance is not supported!");
+            }
+
+            if (osName.contains("window")) {
+                cmd = "taskkill /F /FI \"IMAGENAME eq " + browserDriverName + "*\"";
+            } else {
+                cmd = "pkill " + browserDriverName;
+            }
+
+            if (driver != null) {
+                driver.manage().deleteAllCookies();
+                driver.quit();
+            }
+        } catch (Exception e) {
+            e.getMessage();
+        } finally {
+            try {
+                Process process = Runtime.getRuntime().exec(cmd);
+                process.waitFor();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         //log.info("=============== CLOSE BROWSER & DRIVER ===============");
     }

@@ -3,30 +3,16 @@
 <suite name="Techpanda UI Automation Test" verbose="1" >
     <listeners>
         <listener class-name="core.MethodListener"></listener>
-<!--        <listener class-name="jiraConfigs.JiraListener"></listener>-->
     </listeners>
     
     <parameter name="appUrl" value="https://live.techpanda.org/"></parameter>
 
-    <test name="Run on FIREFOX">
-        <parameter name="browser" value="firefox"></parameter>
+    <test name="Run on CHROME" preserve-order="true">
+        <parameter name="browser" value="chrome"></parameter>
         <classes>
-            <class name="com.techpanda.Level_20_Cookies"></class>
+            <class name="com.techpanda.share.Register"></class>
+<!--            <class name="com.techpanda.Level_20_Cookies"></class>-->
         </classes>
     </test>
-
-<!--    <test name="Run on CHROME">-->
-<!--        <parameter name="browser" value="CHROME"></parameter>-->
-<!--        <classes>-->
-<!--            <class name="com.orangehrm.Level_16_Allure"></class>-->
-<!--        </classes>-->
-<!--    </test>-->
-
-    <!-- <test name="Run on SAFARI">
-        <parameter name="browser" value="SAFARI"></parameter>
-        <classes>
-            <class name="com.orangehrm.Level_16_Allure"></class>
-        </classes>
-    </test> -->
 
 </suite>

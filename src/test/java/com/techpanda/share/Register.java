@@ -26,18 +26,24 @@ public class Register extends BaseTest{
         loginPage = homePage.openLoginPage();
         registerPage = loginPage.clickCreateAnAccountLink();
 
-        registerPage.enterToFirstName("");
-        registerPage.enterToLastName("");
-        registerPage.enterToEmail("");
-        registerPage.enterToPassword("");
-        registerPage.enterToConfirmPassword("");
+        registerPage.enterToFirstName("Phuong");
+        registerPage.enterToLastName("Nguyen");
+        registerPage.enterToEmail("png" + getRandomNumber() + "@yopmail.com");
+        registerPage.enterToPassword("123456789");
+        registerPage.enterToConfirmPassword("123456789");
         registerPage.enterToRegisterButton();
-        myAccountPage = registerPage.acceptContinueAlert();
+        //myAccountPage = registerPage.acceptContinueAlert();
+        myAccountPage = PageGenerator.getPage(MyAccountPO.class, driver);
+
+        verifyEquals(myAccountPage.getSuccessMessage(),"Thank you for registering with Main Website Store.");
 
         cookies = myAccountPage.getPageCookies(driver);
 
-        verifyEquals(myAccountPage.getSuccessMessage(),"Thank you for registering with Main Website Store.");
-        closeBrowser();
+        for (Cookie cookie: cookies){
+            System.out.println(cookie );
+        }
+
+        //closeBrowser();
     }
 
     private WebDriver driver;

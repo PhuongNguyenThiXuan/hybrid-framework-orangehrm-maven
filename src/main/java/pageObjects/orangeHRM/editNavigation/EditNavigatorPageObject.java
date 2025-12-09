@@ -2,7 +2,7 @@ package pageObjects.orangeHRM.editNavigation;
 
 import core.BasePage;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.devtools.v134.page.Page;
+//import org.openqa.selenium.devtools.v134.page.Page;
 import pageObjects.PageGenerator;
 import pageUIs.orangeHRM.editNavigation.EditNavigatorPageUI;
 
