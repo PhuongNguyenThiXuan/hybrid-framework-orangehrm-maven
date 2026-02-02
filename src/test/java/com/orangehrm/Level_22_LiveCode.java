@@ -46,7 +46,7 @@ public class Level_22_LiveCode extends BaseTest{
         verifyTrue(dashboardPage.isModuleByTextInMenuItemDisplayed (driver, "Dashboard"));
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void Employee_01_NewEmployee(){
         dashboardPage.clickToModuleByTextInMenuItem(driver, "PIM");
         employeeListPage = PageGenerator.getPage(EmployeeListPageObject.class, driver);
@@ -121,7 +121,7 @@ public class Level_22_LiveCode extends BaseTest{
 
     @AfterClass(alwaysRun = true)
     public void quit(){
-        //closeBrowser();
+        closeBrowser();
     }
 
     private WebDriver driver;

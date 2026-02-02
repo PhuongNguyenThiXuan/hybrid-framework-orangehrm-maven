@@ -38,11 +38,8 @@ public class PersonalDetailsPageObject extends EditNavigatorPageObject {
     }
 
     public void clickToProfileImage() {
-        waitElementClickable(driver, PersonalDetailsPageUI.EDIT_PROFILE_IMAGE_BTN);
-        clickToElement(driver, PersonalDetailsPageUI.EDIT_PROFILE_IMAGE_BTN);
-
-//        waitElementClickable(driver, PersonalDetailsPageUI.PROFILE_IMAGE);
-//        clickToElement(driver, PersonalDetailsPageUI.PROFILE_IMAGE);
+        waitElementClickable(driver, PersonalDetailsPageUI.PROFILE_IMAGE);
+        clickToElement(driver, PersonalDetailsPageUI.PROFILE_IMAGE);
     }
 
     public String getErrorMessageAtProfileImage() {

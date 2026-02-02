@@ -5,8 +5,7 @@ public class PersonalDetailsPageUI {
     public static final String MIDDLE_NAME_TEXT_BOX = "name=middleName";
     public static final String LAST_NAME_TEXT_BOX = "name=lastName";
     public static final String EMPLOYEE_ID_TEXT_BOX = "xpath=//label[text()='Employee Id']/parent::div/following-sibling::div/input";
-    public static final String EDIT_PROFILE_IMAGE_BTN = "css=img.employee-image";
-    public static final String PROFILE_IMAGE = "css=input[type='file']";
+    public static final String PROFILE_IMAGE = "css=img.employee-image";
     public static final String PROFILE_IMAGE_UPLOAD_ERROR_MSG = "css=span.oxd-input-field-error-message";
 
 }
