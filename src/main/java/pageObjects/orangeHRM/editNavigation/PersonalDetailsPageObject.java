@@ -2,6 +2,7 @@ package pageObjects.orangeHRM.editNavigation;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
+import pageUIs.orangeHRM.editNavigation.EditNavigatorPageUI;
 import pageUIs.orangeHRM.editNavigation.PersonalDetailsPageUI;
 
 public class PersonalDetailsPageObject extends EditNavigatorPageObject {
@@ -34,5 +35,18 @@ public class PersonalDetailsPageObject extends EditNavigatorPageObject {
     public String getEmployeeIDTextBoxValue(){
         waitElementVisible(driver, PersonalDetailsPageUI.EMPLOYEE_ID_TEXT_BOX);
         return getElementDOMProperty(driver,PersonalDetailsPageUI.EMPLOYEE_ID_TEXT_BOX, "value");
+    }
+
+    public void clickToProfileImage() {
+        waitElementClickable(driver, PersonalDetailsPageUI.EDIT_PROFILE_IMAGE_BTN);
+        clickToElement(driver, PersonalDetailsPageUI.EDIT_PROFILE_IMAGE_BTN);
+
+//        waitElementClickable(driver, PersonalDetailsPageUI.PROFILE_IMAGE);
+//        clickToElement(driver, PersonalDetailsPageUI.PROFILE_IMAGE);
+    }
+
+    public String getErrorMessageAtProfileImage() {
+        waitElementVisible(driver, PersonalDetailsPageUI.PROFILE_IMAGE_UPLOAD_ERROR_MSG);
+        return getElementText(driver, PersonalDetailsPageUI.PROFILE_IMAGE_UPLOAD_ERROR_MSG);
     }
 }

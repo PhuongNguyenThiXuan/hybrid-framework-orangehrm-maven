@@ -13,6 +13,7 @@ import pageObjects.openCart.user.UserHomePO;
 import pageObjects.orangeHRM.LoginPageObject;
 import pageUIs.BasePageUI;
 
+import java.security.Key;
 import java.time.Duration;
 import java.util.Date;
 import java.util.List;
@@ -106,6 +107,14 @@ public class BasePage {
     public void sleepInSecond(int timeInSecond){
         try {
             Thread.sleep(timeInSecond * 1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void sleepInMilisecond(int timeInMilisecond){
+        try {
+            Thread.sleep(timeInMilisecond);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -243,7 +252,10 @@ public class BasePage {
     }
 
     public void sendKey (WebDriver driver, String locator, CharSequence keyToSend, String... restValues){
-        getWebElement(driver, castParameter(locator, restValues)).clear();
+        //getWebElement(driver, castParameter(locator, restValues)).clear();
+        getWebElement(driver, castParameter(locator, restValues)).sendKeys(Keys.chord(Keys.CONTROL,"a"));
+        getWebElement(driver, castParameter(locator, restValues)).sendKeys(Keys.DELETE);
+        sleepInMilisecond(500);
         getWebElement(driver, castParameter(locator, restValues)).sendKeys(keyToSend);
     }
 
