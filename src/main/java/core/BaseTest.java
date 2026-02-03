@@ -7,8 +7,11 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.Assert;
 import org.testng.Reporter;
@@ -16,6 +19,8 @@ import org.testng.annotations.BeforeSuite;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.Random;
 
@@ -34,9 +39,21 @@ public class BaseTest {
         switch (browserList){
             case FIREFOX:
                 driver = new FirefoxDriver();
+                Path xpiPath = Paths.get(GlobalConstants.BROWSER_EXTENSION_PATH + "wappalyzer-firefox.xpi");
+                FirefoxDriver ffDriver = (FirefoxDriver) driver;
+                ffDriver. installExtension(xpiPath);
                 break;
             case CHROME:
-                driver = new ChromeDriver();
+//                File file = new File(GlobalConstants.BROWSER_EXTENSION_PATH + "Wappalyzer-chrome.crx");
+//                ChromeOptions chromeOptions = new ChromeOptions();
+//                chromeOptions.addExtensions(file);
+//                driver = new ChromeDriver(chromeOptions);
+
+                ChromeOptions chromeOptions = new ChromeOptions();
+                Path path = Paths.get(GlobalConstants.BROWSER_EXTENSION_PATH + "Wappalyzer-chrome.crx");
+                File extensionFilePath = new File(path.toUri());
+                chromeOptions.addExtensions(extensionFilePath);
+                driver = new ChromeDriver(chromeOptions);
                 break;
             case EDGE:
                 driver = new EdgeDriver();
@@ -44,8 +61,26 @@ public class BaseTest {
             case SAFARI:
                 driver = new SafariDriver();
                 break;
+            case HEAD_CHROME:
+                ChromeOptions chromeHeadOptions = new ChromeOptions();
+                chromeHeadOptions.addArguments("--headless");
+                chromeHeadOptions.addArguments("window-size=1920x1080");
+                driver = new ChromeDriver(chromeHeadOptions);
+                break;
+            case HEAD_FIREFOX:
+                FirefoxOptions firefoxHeadOptions = new FirefoxOptions();
+                firefoxHeadOptions.addArguments("--headless");
+                firefoxHeadOptions.addArguments("window-size=1920x1080");
+                driver = new FirefoxDriver(firefoxHeadOptions);
+                break;
+            case HEAD_EDGE:
+                EdgeOptions edgeHeadOptions = new EdgeOptions();
+                edgeHeadOptions.addArguments("--headless");
+                edgeHeadOptions.addArguments("window-size=1920x1080");
+                driver = new EdgeDriver(edgeHeadOptions);
+                break;
             default:
-                throw new RuntimeException("Browser is not valid");
+                throw new RuntimeException("Browser name is not valid");
         }
         driver.get(appURL);
         //driver.manage().window().setPosition(new Point(0,0));

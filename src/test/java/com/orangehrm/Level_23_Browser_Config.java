@@ -26,12 +26,6 @@ public class Level_23_Browser_Config extends BaseTest{
         driver = getBrowserDriver(appUrl, browserName);
         loginPage = PageGenerator.getPage(LoginPageObject.class, driver);
 
-        //Selenium 4.x
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.setBrowserVersion("144");
-        chromeOptions.useWebView(true);
-        chromeOptions.configureFromEnv();
-
         adminUsername = "automationfc";
         adminPassword = "A@a123456!";
 
@@ -57,7 +51,7 @@ public class Level_23_Browser_Config extends BaseTest{
 
     @AfterClass(alwaysRun = true)
     public void quit(){
-        closeBrowser();
+        //closeBrowser();
     }
 
     private WebDriver driver;
