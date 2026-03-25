@@ -7,11 +7,15 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeDriverService;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxDriverService;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.firefox.GeckoDriverService;
 import org.openqa.selenium.safari.SafariDriver;
 import org.testng.Assert;
 import org.testng.Reporter;
@@ -38,25 +42,48 @@ public class BaseTest {
         BrowserList browserList = BrowserList.valueOf(browserName.toUpperCase());
         switch (browserList){
             case FIREFOX:
-                driver = new FirefoxDriver();
-                Path xpiPath = Paths.get(GlobalConstants.BROWSER_EXTENSION_PATH + "wappalyzer-firefox.xpi");
-                FirefoxDriver ffDriver = (FirefoxDriver) driver;
-                ffDriver. installExtension(xpiPath);
+//------Config install extension----------
+//                driver = new FirefoxDriver();
+//                Path xpiPath = Paths.get(GlobalConstants.BROWSER_EXTENSION_PATH + "wappalyzer-firefox.xpi");
+//                FirefoxDriver ffDriver = (FirefoxDriver) driver;
+//                ffDriver. installExtension(xpiPath);
+//------Config install extension----------
+
+
+//------Config browser log ----------
+                FirefoxDriverService fService = new GeckoDriverService.Builder()
+                        .withLogFile(new File(GlobalConstants.BROWSER_LOG_PATH + "FirefoxLog.log"))
+                        .withLogOutput(System.out)
+                        .build();
+                driver = new FirefoxDriver(fService);
+//------Config browser log ----------
                 break;
             case CHROME:
-//                File file = new File(GlobalConstants.BROWSER_EXTENSION_PATH + "Wappalyzer-chrome.crx");
+//------Config install extension----------
 //                ChromeOptions chromeOptions = new ChromeOptions();
-//                chromeOptions.addExtensions(file);
+//                Path path = Paths.get(GlobalConstants.BROWSER_EXTENSION_PATH + "Wappalyzer-chrome.crx");
+//                File extensionFilePath = new File(path.toUri());
+//                chromeOptions.addExtensions(extensionFilePath);
 //                driver = new ChromeDriver(chromeOptions);
+//------Config install extension----------
 
-                ChromeOptions chromeOptions = new ChromeOptions();
-                Path path = Paths.get(GlobalConstants.BROWSER_EXTENSION_PATH + "Wappalyzer-chrome.crx");
-                File extensionFilePath = new File(path.toUri());
-                chromeOptions.addExtensions(extensionFilePath);
-                driver = new ChromeDriver(chromeOptions);
+//------Config browser log ----------
+                ChromeDriverService cService = new ChromeDriverService.Builder()
+                        .withLogFile(new File(GlobalConstants.BROWSER_LOG_PATH + "ChromeLog.log"))
+                        .withLogOutput(System.out)
+                        .build();
+                driver = new ChromeDriver(cService);
+//------Config browser log ----------
                 break;
             case EDGE:
-                driver = new EdgeDriver();
+                //driver = new EdgeDriver();
+//------Config browser log ----------
+                EdgeDriverService edgeService = new EdgeDriverService.Builder()
+                        .withLogFile(new File(GlobalConstants.BROWSER_LOG_PATH + "EdgeLog.log"))
+                        .withLogOutput(System.out)
+                        .build();
+                driver = new EdgeDriver(edgeService);
+//------Config browser log ----------
                 break;
             case SAFARI:
                 driver = new SafariDriver();

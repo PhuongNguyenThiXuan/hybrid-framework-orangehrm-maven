@@ -51,7 +51,7 @@ public class Level_23_Browser_Config extends BaseTest{
 
     @AfterClass(alwaysRun = true)
     public void quit(){
-        //closeBrowser();
+        closeBrowser();
     }
 
     private WebDriver driver;

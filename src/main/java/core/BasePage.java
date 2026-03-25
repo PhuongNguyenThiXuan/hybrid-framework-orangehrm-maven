@@ -13,7 +13,6 @@ import pageObjects.openCart.user.UserHomePO;
 import pageObjects.orangeHRM.LoginPageObject;
 import pageUIs.BasePageUI;
 
-import java.security.Key;
 import java.time.Duration;
 import java.util.Date;
 import java.util.List;
@@ -276,12 +275,12 @@ public class BasePage {
         new Select(getWebElement(driver, castParameter(locator, restValues))).selectByVisibleText(valueItem);
     }
 
-    public void getSelectItemInDropdown (WebDriver driver, String locator){
-        new Select(getWebElement(driver, locator)).getFirstSelectedOption().getText();
+    public String getSelectItemInDropdown (WebDriver driver, String locator){
+        return new Select(getWebElement(driver, locator)).getFirstSelectedOption().getText();
     }
 
-    public void getSelectItemInDropdown (WebDriver driver, String locator, String... restValues){
-        new Select(getWebElement(driver, castParameter(locator, restValues))).getFirstSelectedOption().getText();
+    public String getSelectItemInDropdown (WebDriver driver, String locator, String... restValues){
+        return new Select(getWebElement(driver, castParameter(locator, restValues))).getFirstSelectedOption().getText();
     }
 
     public boolean isDropdownMultiple (WebDriver driver, String locator){
