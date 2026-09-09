@@ -19,11 +19,12 @@ public class GlobalConstants {
     public static final String STAGING_ADMIN_URL="";
     public static final String LIVE_ADMIN_URL="";
 
-    public static final String ADMIN_USERNAME="";
-    public static final String ADMIN_PASSWORD="";
+    public static final String ADMIN_ORANGE_USERNAME = "Admin";
+    public static final String ADMIN_ORANGE_PASSWORD = "admin123";
+
 
     //Wait Info
-    public static final long SHORT_TIMEOUT=10;
+    public static final long SHORT_TIMEOUT=5;
     public static final long LONG_TIMEOUT=30;
 
     //Upload/ Download
@@ -42,7 +43,13 @@ public class GlobalConstants {
     public static final String EXTENT_PATH=PROJECT_PATH + File.separator + "htmlReport" + File.separator;
     public static final String ALLURE_PATH=PROJECT_PATH + File.separator + "" + File.separator;
 
+    //JIRA
+    public static final String JIRA_SITE_URL="https://phuongvng0001-1768532752561.atlassian.net/";
+    public static final String JIRA_USERNAME="phuongvng0001@gmail.com";
+    public static final String JIRA_API_KEY="ATATT3xFfGF06qQOz6dlVgysN5oqC_dy6F9sXFdO3g_zE4HvEDHGMIT33WMGo7qsTCM4V5JhaRNRSKMPgXVBrSC2A_rus9-An4r2W-eWgd-NsX2rdq_DfDWy5Xhyklg2yu57mob4lp98fIxYo2tLmyqBWrwdGJlF6NCnUL2TMa-dglPRnJy6K4A=3E5C9BC5";
+    public static final String JIRA_PROJECT_KEY="SCRUM";
+
     //Date Test/ Environment
-    public static final String DATA_TEST_PATH=PROJECT_PATH + File.separator + "/dataTest/" + File.separator;
+    public static final String DATA_TEST_PATH=PROJECT_PATH + File.separator + "/testdata/" + File.separator;
     public static final String ENVIRONMENT_CONFIG_PATH=PROJECT_PATH + File.separator + "//" + File.separator;
 }

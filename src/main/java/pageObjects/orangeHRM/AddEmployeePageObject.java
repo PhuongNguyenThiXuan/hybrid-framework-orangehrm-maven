@@ -31,6 +31,11 @@ public class AddEmployeePageObject extends BasePage {
         sendKey(driver, AddEmployeePageUI.LAST_NAME_TEXT_BOX, lastName);
     }
 
+    public void  enterToForm (Employee_Data employeeData){
+        enterToFirstNameTextBox(employeeData.getFirstName());
+        enterToLastNameTextBox(employeeData.getLastName());
+    }
+
     @Step("Get EmployeeID")
     public String getEmployeeID() {
         waitElementVisible (driver, AddEmployeePageUI.EMPLOYEE_ID_TEXT_BOX);

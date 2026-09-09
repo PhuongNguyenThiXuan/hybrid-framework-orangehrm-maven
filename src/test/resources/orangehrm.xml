@@ -8,25 +8,32 @@
     
     <parameter name="appUrl" value="http://localhost/orangehrm"></parameter>
 
-    <test name="Run on FIREFOX">
-        <parameter name="browser" value="FIREFOX"></parameter>
-        <classes>
-            <class name="com.orangehrm.Level_23_Browser_Config"></class>
-        </classes>
-    </test>
+<!--    <test name="Run on FIREFOX">-->
+<!--        <parameter name="browser" value="FIREFOX"></parameter>-->
+<!--        <classes>-->
+<!--            <class name="com.orangehrm.Level_23_Browser_Config"></class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
     <test name="Run on CHROME">
-        <parameter name="browser" value="CHROME"></parameter>
+<!--        <parameter name="browser" value="CHROME"></parameter>-->
+<!--        <parameter name="adminUsername" value="automationfc"></parameter>-->
+<!--        <parameter name="adminPassword" value="A@a123456!"></parameter>-->
+<!--        <parameter name="employeeFirstName" value="Hello"></parameter>-->
+<!--        <parameter name="employeeMiddleName" value="Test"></parameter>-->
+<!--        <parameter name="employeeLastName" value="World!"></parameter>-->
+<!--        <parameter name="employeeUsername" value="phuong"></parameter>-->
+<!--        <parameter name="employeePassword" value="A@a123456!#$"></parameter>-->
         <classes>
-            <class name="com.orangehrm.Level_23_Browser_Config"></class>
+            <class name="com.orangehrm.Level_25_Data_Test_IV_POJO"></class>
         </classes>
     </test>
 
-    <test name="Run on EDGE">
-        <parameter name="browser" value="EDGE"></parameter>
-        <classes>
-            <class name="com.orangehrm.Level_23_Browser_Config"></class>
-        </classes>
-    </test>
+<!--    <test name="Run on EDGE">-->
+<!--        <parameter name="browser" value="EDGE"></parameter>-->
+<!--        <classes>-->
+<!--            <class name="com.orangehrm.Level_23_Browser_Config"></class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 </suite>
